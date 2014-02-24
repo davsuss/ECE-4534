@@ -9,6 +9,10 @@
 int Send = 0;
 static i2c_comm *ic_ptr;
 
+#define I2C_MODE_MASTER 1
+#define I2C_MODE_SLAVE 2
+static unsigned char i2c_mode = 0;
+
 // Configure for I2C Master mode -- the variable "slave_addr" should be stored in
 //   i2c_comm (as pointed to by ic_ptr) for later use.
 int isSending()
@@ -16,6 +20,8 @@ int isSending()
     return ic_ptr->status == I2C_SLAVE_SEND;
 }
 void i2c_configure_master(unsigned char slave_addr) {
+    i2c_mode = I2C_MODE_MASTER;
+    // Page 176
     ic_ptr->slave_addr = slave_addr;
 
     // Clearing the registers
@@ -24,14 +30,14 @@ void i2c_configure_master(unsigned char slave_addr) {
     SSPSTAT = 0x0;
 
     //Configure SSPxADD for the I2C Clock
-    //SSPADD = ?
+    SSPADD = 0x0A;	//400kHz Baud clock(9) @8MHz
     
     // Configred into I2C Master mode, clock = FOSC/(4* (SSPxADD + 1))
-    SSPCON1 = 0x08;
-
+    SSPCON1bits.SSPM = 0x08;
+    SSPCON1bits.SSPEN = 1;
+    
     // What is SLEW?  Turned it off anyways
     SSPSTAT = SLEW_OFF;
-    //SSPCON1 = SSPENB;   ??
 
     // Turning on bits of LATC to set SCL1/SDA1 on
     LATCbits.LATC3 = 1;
@@ -64,13 +70,14 @@ unsigned char i2c_master_send(unsigned char length, unsigned char *msg) {
     }
 
     ic_ptr->outbuflen = length;
-    // What is this?
-    //ic_ptr->outbufind = ;
+    ic_ptr->outbufind = 0;
 
     // Start the I2C transfer
     // See page 162 - SSPxCON2 is the MSSPx Control Register 2
     SSPCON2bits.RCEN = 1;   // Enables receive mode for I2C (Master recieve mode only)
     SSPCON2bits.SEN = 1;    // Initiate start condition on the SDAx and SCLx pins
+
+    ic_ptr->status = I2C_MASTER_SEND_STARTED;
 
     return(0);
 }
@@ -89,7 +96,6 @@ unsigned char i2c_master_send(unsigned char length, unsigned char *msg) {
 // The interrupt handler will be responsible for copying the message received into
 
 unsigned char i2c_master_recv(unsigned char length) {
-
     // See page 160, if the READ_WRITE register is 1 then a transmit is in progress
     if (SSPSTATbits.READ_WRITE == 1){
         return -1;      //returns -1 if the i2c bus is busy
@@ -99,18 +105,19 @@ unsigned char i2c_master_recv(unsigned char length) {
     SSPCON2bits.RCEN = 1;
     SSPCON2bits.SEN = 1;
 
+    ic_ptr->status = I2C_MASTER_RECV_STARTED;
+
     return(0);
 }
+
 void Handle_i2c_data_save(unsigned char length,unsigned char *msg)
 {
-  
     if(ic_ptr->sendBufLen < I2C_Buffer_Size)
     {   
      ic_ptr->sendBuf[ic_ptr->sendBufLen] = *msg;
      ic_ptr->sendBufLen++;
     }
 }
-
 
 void start_i2c_slave_reply(unsigned char length, unsigned char *msg) {
 
@@ -177,6 +184,23 @@ void start_i2c_slave_reply(unsigned char length, unsigned char *msg) {
 //    master code should be in a subroutine called "i2c_master_handler()"
 
 void i2c_int_handler() {
+    switch (i2c_mode){
+        case I2C_MODE_MASTER: {
+            i2c_master_int_handler();
+            break;
+        }
+        case I2C_MODE_SLAVE: {
+            i2c_slave_int_handler();
+            break;
+        }
+        default: {
+            // mode was not set, ERROR
+            break;
+        }
+    }
+}
+
+void i2c_slave_int_handler() {
     unsigned char i2c_data;
     unsigned char data_read = 0;
     unsigned char data_written = 0;
@@ -408,9 +432,190 @@ void i2c_configure_slave(unsigned char addr) {
 #endif
 #endif
 #endif
-    
+    i2c_mode = I2C_MODE_SLAVE;
     // enable clock-stretching
     SSPCON2bits.SEN = 1;
     SSPCON1 |= SSPENB;
     // end of i2c configure
+}
+
+void i2c_master_int_handler(){
+    switch (ic_ptr->status){
+        // Page 183 - I2C Master Mode Waveform (Transfer)
+        case (I2C_MASTER_SEND_STARTED): {
+            ic_ptr->status = I2C_MASTER_SENDING;
+            SSPBUF = ((ic_ptr->slave_addr << 1) & 0xFE);
+            break;
+        }
+        case (I2C_MASTER_SENDING): {
+            if (SSPCON2bits.ACKSTAT == 0) {
+                if (ic_ptr->outbufind < ic_ptr->outbuflen) {
+                    SSPBUF = ic_ptr->outbuffer[ic_ptr->outbufind];
+                    ic_ptr->outbufind++;
+                    ic_ptr->status = I2C_MASTER_SEND_ACK;
+                }
+                else {
+                    ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_SEND_COMPLETE, 0);
+                    ic_ptr->outbuflen = 0;
+                    ic_ptr->status = I2C_IDLE;
+                    SSPCON2bits.PEN = 1;
+                }
+            }
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_SEND_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+        case (I2C_MASTER_SEND_ACK): {
+            if (SSPCON2bits.ACKSTAT == 0) {
+                ic_ptr->status = I2C_MASTER_SEND_DONE;
+                SSPCON2bits.PEN = 1;
+            }
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_SEND_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+        case (I2C_MASTER_SEND_DONE): {
+            ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_SEND_COMPLETE, 0);
+            ic_ptr->status = I2C_IDLE;
+            break;
+        }
+        //approach 2
+        case (I2C_MASTER_RECV_STARTED): {
+            ic_ptr->status = I2C_MASTER_RECV_ACK;
+            SSPBUF = ((ic_ptr->slave_addr << 1) & 0xFF);
+            break;
+        }
+        case (I2C_MASTER_RECV_ACK): {
+            if (SSPCON2bits.ACKSTAT == 0) {
+                SSPCON2bits.RCEN = 1;
+                ic_ptr->status = I2C_MASTER_RECV_DATA;
+            }
+            // No ACK, send back to IDLE
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_RECV_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+        case (I2C_MASTER_RECV_DATA): {
+            ic_ptr->outbuffer[ic_ptr->outbuflen + 1] = SSPBUF;
+            ic_ptr->outbuflen++;
+            SSPCON2bits.ACKDT = 0;
+            ic_ptr->status = I2C_MASTER_RECV_ACK_2;
+            break;
+        }
+        case (I2C_MASTER_RECV_ACK_2): {
+            SSPCON2bits.RCEN = 1;
+            ic_ptr->status = I2C_MASTER_RECV_DATA_2;
+            break;
+        }
+        case (I2C_MASTER_RECV_DATA_2): {
+            ic_ptr->outbuffer[ic_ptr->outbuflen + 1] = SSPBUF;
+            ic_ptr->outbuflen++;
+            SSPCON2bits.ACKEN = 1;
+            SSPCON2bits.ACKDT = 1;
+            ic_ptr->status = I2C_MASTER_RECV_ACK_2;
+            break;
+        }
+        case (I2C_MASTER_RECV_DONE): {
+            ToMainHigh_sendmsg(ic_ptr->buflen, MSGT_I2C_MASTER_RECV_COMPLETE, (void *)(ic_ptr->buffer));
+            SSPCON2bits.PEN = 1;
+            ic_ptr->status = I2C_IDLE;
+            break;
+        }
+        // Page 184 - I2C Master Mode Recieve
+        /*
+        case (I2C_MASTER_RECV_STARTED): {
+            // ACTSTAT is cleared when the slave has sent an ACK
+            if (SSPCON2bits.ACKSTAT == 0) {
+                ic_ptr->status = I2C_MASTER_RECV_ACK;
+                SSPBUF = ic_ptr->slave_addr;
+            }
+            // No ACK, send back to IDLE
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_RECV_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+        case (I2C_MASTER_RECV_ACK): {
+            if (SSPCON2bits.ACKSTAT == 0) {
+                ic_ptr->status = I2C_MASTER_RECV_DATA;
+                ic_ptr->outbuflen = 0;
+                SSPBUF = ic_ptr->outbuffer[0];
+            }
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_RECV_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+       case I2C_MASTER_RECV_DATA: {
+            if (SSPCON2bits.ACKSTAT == 0) {
+                ic_ptr->status = I2C_RESTARTED;
+                SSPCON2bits.RSEN = 1;
+            }
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_RECV_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+        case I2C_RESTARTED: {
+            ic_ptr->status = I2C_WAIT;
+            SSPBUF = ic_ptr->slave_addr | 0x1;
+            break;
+        }
+        case I2C_WAIT: {
+            if (SSPCON2bits.ACKSTAT == 0) {
+                ic_ptr->status = I2C_RECV;
+                SSPCON2bits.RCEN = 1;
+            }
+            else {
+                ToMainHigh_sendmsg(0, MSGT_I2C_MASTER_RECV_FAILED, 0);
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }
+        case I2C_RECV: {
+            if (SSPSTATbits.BF == 1) {
+                ic_ptr->status = I2C_RECV_ACK;
+                ic_ptr->buffer[ic_ptr->bufind] = SSPBUF;
+                ic_ptr->bufind++;
+                if (ic_ptr->bufind < ic_ptr->buflen) {
+                    SSPCON2bits.ACKDT = 0;
+                    SSPCON2bits.ACKEN = 1;
+                }
+                else {
+                    SSPCON2bits.ACKDT = 1;
+                    SSPCON2bits.ACKEN = 1;
+                }
+            }
+            break;
+        }
+        case I2C_RECV_ACK: {
+            if (ic_ptr->bufind < ic_ptr->buflen) {
+                ic_ptr->status = I2C_RECV;
+                SSPCON2bits.RCEN = 1;
+            }
+            else {
+                ToMainHigh_sendmsg(ic_ptr->buflen, MSGT_I2C_MASTER_RECV_COMPLETE,
+                    (void *)(ic_ptr->buffer));
+                ic_ptr->status = I2C_IDLE;
+                SSPCON2bits.PEN = 1;
+            }
+            break;
+        }*/
+    }
 }
