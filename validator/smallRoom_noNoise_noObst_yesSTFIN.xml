@@ -2,8 +2,8 @@
     <!-- Room length and width is in inches and so is every other dimension -->
     <!-- Send 30 00 00 00 00 30 to stop the matlab prgram should draw the resultant map-->
 	<room length = '50' width = '50'/>
-	<start p1 = '10 0' p2 = '10 12'/>
-    <finish p1 = '10 0' p2 = '10 12'/>
+	<start p1 = '20 0' p2 = '20 15'/>
+    <finish p1 = '20 0' p2 = '20 15'/>
 	<rover ref = '25 5' length = '4' width = '2' orientation = '0' ir1_p1 = '-1 -1' ir1_p2 = '-1 -2' ir2_p1 = '1 -1' ir2_p2 = '1 -2' son_p1 = '2 0' son_p2 = '3 0'>
         <left>1</left>
         <right>1</right>

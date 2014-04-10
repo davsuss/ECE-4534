@@ -1,12 +1,12 @@
 % Author: Bishwamoy Sinha Roy
 
-function [] = Validator(serial_port)
+function [] = Validator(serial_port, xmlFile)
 warning off;
 
 %getFromARM(serial_port);
 %sendToARM(0, 3, [12, 12, 12], [50, 78], serial_port);
 
-[rm, obst, st, fin, rov]  = xmlToMap();
+[rm, obst, st, fin, rov]  = xmlToMap(xmlFile);
 distances = uint16(zeros(1,2)); % (right, left) rotations
 constants = struct('msgID_sensorReq', uint8(0), 'msgID_sensorReq2', uint8(1), 'msgID_cmd', uint8(2), ...
     'cmdID_start', uint8(0), 'cmdID_stop', uint8(1), 'cmdID_slow', uint8(2), 'cmdID_fast', uint8(3), ...
@@ -66,9 +66,6 @@ done = false;
 draw(state, path(1:differentPathCmds, 1:4));
 b = 0;
 l = 1;
-cf = [0 0 0 0];
-cs1 = [0 0 0 0];
-cs2 = [0 0 0 0];
 fclose(serial_port);
 fopen(serial_port);
 % for j = 1:4
@@ -92,7 +89,7 @@ pause(1);
 disp('go!');
 while done == false
     time1 = clock();
-    [msgGood, ID, num, cmd] = getFromARM(serial_port);
+    [msgGood, ID, num, cmd] = getFromARM(serial_port)
     l = l + 1;
 %     ID = 2;
 %     msgGood = 1;
@@ -121,6 +118,7 @@ while done == false
                     done = true;
                 end
             case 3
+                sendToARM(3, 0, 0, [0 0 0 0], serial_port);%send back an ack
                 done = true;
             otherwise
                 disp('Problem with ID');
@@ -140,12 +138,11 @@ end
 % Draw room on graph
 function [] = draw(state, path)
     x = linspace(-10, state.Room.wid + 10, state.Room.wid+21);
-    drawRect(state.Room.len/2, state.Room.wid/2, state.Room.wid, state.Room.wid, 0, 'w'); 
+    drawRect(state.Room.len/2, state.Room.wid/2, state.Room.len, state.Room.wid, 0, 'w'); 
     
     hold on
-    line([state.Finish.p1(1) state.Finish.p2(1)], [state.Finish.p1(2) state.Finish.p2(2)]);
     %finish line
-    line([state.Finish.p1(1) state.Finish.p2(1)], [state.Finish.p1(2) state.Finish.p2(2)]);
+    %line([state.Finish.p1(1) state.Finish.p2(1)], [state.Finish.p1(2) state.Finish.p2(2)]);
     hold on
     %start line
     line([state.Start.p1(1) state.Start.p2(1)], [state.Start.p1(2) state.Start.p2(2)]);
@@ -584,8 +581,8 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
         state.Rover.orientation = newO + state.Rover.orientation;
         disp('ref'); 
         disp(newLoc);
-        disp('o');
-        disp(state.Rover.orientation)
+        disp('orientation');
+        disp(mod(state.Rover.orientation,360))
         %determin path
         if( state.Rover.orientation == pth(differentPathCmds, 3) )
             pth(differentPathCmds, 4) = pth(differentPathCmds, 4) + distanceTrav;
@@ -723,7 +720,7 @@ end
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 % XML reading
-function [room, obstacles, start, finish, rover] = xmlToMap()
+function [room, obstacles, start, finish, rover] = xmlToMap(file)
 %following positions result from the element number in the xml file
 room_child_pos = 6; %which element in the resulting struct will the room element result in
 st_child_pos = 8; %which element in the resulting struct will the start element result in
@@ -761,7 +758,7 @@ obst_wid_num = 4;
 obst_orien_num = 2;
 
 %read the xml file - should use a xsd to validate
-xDoc = xmlread(fullfile('map.xml'));
+xDoc = xmlread(fullfile(file));
 
 try
    theStruct = parseChildNodes(xDoc);
