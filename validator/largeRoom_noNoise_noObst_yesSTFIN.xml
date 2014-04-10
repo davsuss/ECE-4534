@@ -1,0 +1,13 @@
+<map numOfObstacles = '0'>
+    <!-- Room length and width is in inches and so is every other dimension -->
+    <!-- Send 30 00 00 00 00 30 to stop the matlab prgram should draw the resultant map-->
+	<room length = '300' width = '300'/>
+	<start p1 = '100 280' p2 = '100 300'/>
+    <finish p1 = '100 280' p2 = '100 300'/>
+	<rover ref = '9 150' length = '12' width = '12' orientation = '270' ir1_p1 = '-6 -6' ir1_p2 = '-6 -7' ir2_p1 = '6 -6' ir2_p2 = '6 -7' son_p1 = '6 -6' son_p2 = '12 -6'>
+        <left>1</left>
+        <right>1</right>
+        <wheelRadius>1.5</wheelRadius>
+    </rover>
+    <obstacle ref = '100 10' length = '10' width = '20' orientation = '0'/>
+</map>
