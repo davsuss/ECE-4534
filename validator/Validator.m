@@ -30,7 +30,7 @@ possibleObstacles(3,1:4) = [state.Room.len state.Room.wid 0 state.Room.wid];
 possibleObstacles(4,1:4) = [0 state.Room.wid 0 0];
 %obstacles
 pos = 5;
-path = zeros(600, 4); 
+path = zeros(900, 4); 
 differentPathCmds = 1;
 path(differentPathCmds,1:4) = [state.Rover.ref state.Rover.orientation 0];
 for i = 1:(length(state.Obstacles)/5)
@@ -68,8 +68,8 @@ b = 0;
 l = 1;
 fclose(serial_port);
 fopen(serial_port);
-% for j = 1:4
-% [state, pth, ok] = executeCmd([0 0 1 0; 0 0 1 0; 0 0 1 0; 0 0 1 0; 33 90 0 0], state, possibleObstacles, serial_port);
+% for j = 1:10
+% [state, pth, ok] = executeCmd([0 0 1 0; 0 0 1 0; 0 0 1 0], state, possibleObstacles, serial_port);
 %  s = size(pth);
 %  lastEnd_rov = [path(differentPathCmds,4), 0];%end in rover coordinates
 %  lastEnd = convertCoordinate(lastEnd_rov, path(differentPathCmds,1:2), path(differentPathCmds,3));
@@ -82,11 +82,14 @@ fopen(serial_port);
 %      end
 %  end
 %  state = replyToArm(state, possibleObstacles, serial_port);
+%  draw(state, path(1:differentPathCmds, 1:4));
+%  pause(1);
 % end
 draw(state, path(1:differentPathCmds, 1:4));
 disp('wait');
 pause(1);
 disp('go!');
+total_t = clock();
 while done == false
     time1 = clock();
     [msgGood, ID, num, cmd] = getFromARM(serial_port)
@@ -129,7 +132,11 @@ while done == false
     end
     time2 = clock();
     elapsed = etime(time2, time1)
+    pause(1);
+    draw(state, path(1:differentPathCmds, 1:4));
 end
+endT = clock();
+totalTimeElapsed = etime(endT, total_t);
 draw(state, path(1:differentPathCmds, 1:4));
 fclose(serial_port);
 end
@@ -168,11 +175,20 @@ function [] = draw(state, path)
     drawRect(rov_pt(1), rov_pt(2), rov_len, rov_wid, rov_orien, 'g');
     
     %draw the path
-    s = size(path);
-    for i = 1:s(1)
-        lastEnd_rov = [path(i,4), 0];%end in rover coordinates
-        lastEnd = convertCoordinate(lastEnd_rov, path(i,1:2), path(i,3));
-        line([path(i,1) lastEnd(1)], [path(i,2) lastEnd(2)]);
+    if( state.Rover.right_err == state.Rover.left_err )
+        s = size(path);
+        for i = 1:s(1)
+            lastEnd_rov = [path(i,4), 0];%end in rover coordinates
+            lastEnd = convertCoordinate(lastEnd_rov, path(i,1:2), path(i,3));
+            line([path(i,1) lastEnd(1)], [path(i,2) lastEnd(2)]);
+        end
+    else
+        s = size(path);
+        for i = 2:s(1)
+            lastEnd_rov = [path(i,1), path(i,2)];
+            lastEnd = [path(i-1,1), path(i-1,2)];
+            line([lastEnd_rov(1) lastEnd(1)], [lastEnd_rov(2) lastEnd(2)]);
+        end
     end
 end
 
@@ -486,8 +502,8 @@ function [updatedState] = replyToArm(st, possible_obst, serial_port)
         disp(uint16(side2(1, i))); 
     end
 
-    sendToARM(id, numOfFrontSamples + 2*numOfSideSamples, [front, side1, side2], [0,0], serial_port);
-    state.Rotations = [0 0];
+    sendToARM(id, numOfFrontSamples + 2*numOfSideSamples, [front, side1, side2], state.Distance, serial_port);
+    state.Distance = [0 0];
     updatedState = state;
 end
 
@@ -594,7 +610,7 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
         %calculate rotations
         rotRight = convToRot(rightTrav,rov_wheelRad);
         rotLeft = convToRot(leftTrav,rov_wheelRad);
-        state.Distance = uint16(state.Distance) + [rotRight, rotLeft];        
+        state.Distance = uint16(state.Distance) + uint16([rightTrav, leftTrav]);        
     end
     
     %send an ack
@@ -693,8 +709,8 @@ function [] = sendToARM(msgID, numOfSamples, Samples, Distances, serial_port)
     
     distData_parsed = zeros(1,4);
     for i=0:1
-        distData_parsed(1, 2*i + 1) = floor(Distances(1,i+1)/12); %feet
-        distData_parsed(1, 2*i + 2) = mod(Distances(1,i+1),12); %inches
+        distData_parsed(1, 2*i + 1) = floor(double(Distances(1,i+1))/double(12)); %feet
+        distData_parsed(1, 2*i + 2) = mod(double(Distances(1,i+1)),double(12)); %inches
     end
     
     %package data into message
