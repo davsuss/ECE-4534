@@ -1,0 +1,1507 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F46J50 ]
+[d frameptr 4065 ]
+"21 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.h
+[e E9101 . `uc
+GET_MSG_ID_AND_LEN 0
+GET_SAMPLE 1
+GET_DISTANCE_FEET_LEFT 2
+GET_DISTANCE_INCHES_LEFT 3
+GET_DISTANCE_FEET_RIGHT 4
+GET_DISTANCE_INCHES_RIGHT 5
+GET_CHECK_SUM 6
+]
+[e E9156 . `uc
+GET_MSG_ID_AND_LEN 0
+GET_SAMPLE 1
+GET_DISTANCE_FEET_LEFT 2
+GET_DISTANCE_INCHES_LEFT 3
+GET_DISTANCE_FEET_RIGHT 4
+GET_DISTANCE_INCHES_RIGHT 5
+GET_CHECK_SUM 6
+]
+[e E9086 . `uc
+GET_MSG_ID_AND_LEN 0
+GET_SAMPLE 1
+GET_DISTANCE_FEET_LEFT 2
+GET_DISTANCE_INCHES_LEFT 3
+GET_DISTANCE_FEET_RIGHT 4
+GET_DISTANCE_INCHES_RIGHT 5
+GET_CHECK_SUM 6
+]
+[e E9091 . `uc
+GET_MSG_ID_AND_LEN 0
+GET_SAMPLE 1
+GET_DISTANCE_FEET_LEFT 2
+GET_DISTANCE_INCHES_LEFT 3
+GET_DISTANCE_FEET_RIGHT 4
+GET_DISTANCE_INCHES_RIGHT 5
+GET_CHECK_SUM 6
+]
+"4 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/debug.c
+[v _setDBG setDBG `(v  1 e 0 0 ]
+"26
+[v _resetDBG resetDBG `(v  1 e 0 0 ]
+"47
+[v _flipDBG flipDBG `(v  1 e 0 0 ]
+[v i1_flipDBG flipDBG `(v  1 e 0 0 ]
+[v i1_flipDBG flipDBG `(v  1 e 0 0 ]
+[v i2_flipDBG flipDBG `(v  1 e 0 0 ]
+[v i2_flipDBG flipDBG `(v  1 e 0 0 ]
+"14 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/interrupts.c
+[v _enable_interrupts enable_interrupts `(v  1 e 0 0 ]
+"22
+[v _in_high_int in_high_int `(i  1 e 2 0 ]
+[v i2_in_high_int in_high_int `(i  1 e 2 0 ]
+[v i2_in_high_int in_high_int `(i  1 e 2 0 ]
+"26
+[v _low_int_active low_int_active `(i  1 e 2 0 ]
+"30
+[v _in_low_int in_low_int `(i  1 e 2 0 ]
+[v i2_in_low_int in_low_int `(i  1 e 2 0 ]
+[v i2_in_low_int in_low_int `(i  1 e 2 0 ]
+"40
+[v _in_main in_main `(i  1 e 2 0 ]
+"84
+[v _InterruptHandlerHigh InterruptHandlerHigh `II(v  1 e 0 0 ]
+"130
+[v _InterruptHandlerLow InterruptHandlerLow `IIL(v  1 e 0 0 ]
+"187 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/main.c
+[v _main main `(v  1 e 0 0 ]
+"14 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _init_queue init_queue `(v  1 e 0 0 ]
+"24
+[v _send_msg send_msg `(c  1 e 1 0 ]
+[v i2_send_msg send_msg `(c  1 e 1 0 ]
+[v i2_send_msg send_msg `(c  1 e 1 0 ]
+"63
+[v _recv_msg recv_msg `(c  1 e 1 0 ]
+"103
+[v _ToMainLow_sendmsg ToMainLow_sendmsg `(c  1 e 1 0 ]
+"112
+[v _ToMainLow_recvmsg ToMainLow_recvmsg `(c  1 e 1 0 ]
+"126
+[v _ToMainHigh_sendmsg ToMainHigh_sendmsg `(c  1 e 1 0 ]
+"135
+[v _ToMainHigh_recvmsg ToMainHigh_recvmsg `(c  1 e 1 0 ]
+"150
+[v _FromMainLow_sendmsg FromMainLow_sendmsg `(c  1 e 1 0 ]
+"159
+[v _FromMainLow_recvmsg FromMainLow_recvmsg `(c  1 e 1 0 ]
+"174
+[v _FromMainHigh_sendmsg FromMainHigh_sendmsg `(c  1 e 1 0 ]
+"183
+[v _FromMainHigh_recvmsg FromMainHigh_recvmsg `(c  1 e 1 0 ]
+"194
+[v _init_queues init_queues `(v  1 e 0 0 ]
+"202
+[v _enter_sleep_mode enter_sleep_mode `(v  1 e 0 0 ]
+"222
+[v _check_msg check_msg `(uc  1 e 1 0 ]
+[v i2_check_msg check_msg `(uc  1 e 1 0 ]
+[v i2_check_msg check_msg `(uc  1 e 1 0 ]
+"228
+[v _SleepIfOkay SleepIfOkay `(v  1 e 0 0 ]
+"258
+[v _block_on_To_msgqueues block_on_To_msgqueues `(v  1 e 0 0 ]
+"16 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_i2c.c
+[v _isSending isSending `(i  1 e 2 0 ]
+"20
+[v _i2c_configure_master i2c_configure_master `(v  1 e 0 0 ]
+"36
+[v _i2c_master_send i2c_master_send `(uc  1 e 1 0 ]
+"54
+[v _i2c_master_recv i2c_master_recv `(uc  1 e 1 0 ]
+"58
+[v _Handle_i2c_data_save Handle_i2c_data_save `(v  1 e 0 0 ]
+"68
+[v _WriteI2CBuffer WriteI2CBuffer `(v  1 e 0 0 ]
+"82
+[v _start_i2c_slave_reply start_i2c_slave_reply `(v  1 e 0 0 ]
+"124
+[v _handle_start handle_start `(v  1 e 0 0 ]
+"153
+[v _i2c_int_handler i2c_int_handler `(v  1 e 0 0 ]
+"325
+[v _init_i2c init_i2c `(v  1 e 0 0 ]
+"341
+[v _i2c_configure_slave i2c_configure_slave `(v  1 e 0 0 ]
+"12 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.c
+[v _uart_recv_int_handler uart_recv_int_handler `(v  1 e 0 0 ]
+"51
+[v _init_uart_recv init_uart_recv `(v  1 e 0 0 ]
+"56
+[v _uart_write uart_write `(v  1 e 0 0 ]
+"78
+[v _retrieve_command retrieve_command `(v  1 e 0 0 ]
+"12 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/timer0_thread.c
+[v _timer0_lthread timer0_lthread `(i  1 e 2 0 ]
+"6 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/timer1_thread.c
+[v _init_timer1_lthread init_timer1_lthread `(v  1 e 0 0 ]
+"14
+[v _timer1_lthread timer1_lthread `(i  1 e 2 0 ]
+"9 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/uart_thread.c
+[v _uart_lthread uart_lthread `(i  1 e 2 0 ]
+"18 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/user_interrupts.c
+[v _timer0_int_handler timer0_int_handler `(v  1 e 0 0 ]
+"42
+[v _timer1_int_handler timer1_int_handler `(v  1 e 0 0 ]
+"56
+[v _adc_int_handler adc_int_handler `(v  1 e 0 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/abdiv.c
+[v ___abdiv __abdiv `(c  1 e 1 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/abmod.c
+[v ___abmod __abmod `(c  1 e 1 0 ]
+"31 /Applications/microchip/xc8/v1.30/sources/common/abtofl.c
+[v ___abtofl __abtofl `(d  1 e 3 0 ]
+"33 /Applications/microchip/xc8/v1.30/sources/common/abtoft.c
+[v ___abtoft __abtoft `(f  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/almod.c
+[v ___almod __almod `(l  1 e 4 0 ]
+"36 /Applications/microchip/xc8/v1.30/sources/common/altofl.c
+[v ___altofl __altofl `(d  1 e 3 0 ]
+"42 /Applications/microchip/xc8/v1.30/sources/common/altoft.c
+[v ___altoft __altoft `(f  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/atdiv.c
+[v ___atdiv __atdiv `(m  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/atmod.c
+[v ___atmod __atmod `(m  1 e 3 0 ]
+"37 /Applications/microchip/xc8/v1.30/sources/common/attofl.c
+[v ___attofl __attofl `(d  1 e 3 0 ]
+"37 /Applications/microchip/xc8/v1.30/sources/common/attoft.c
+[v ___attoft __attoft `(f  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"31 /Applications/microchip/xc8/v1.30/sources/common/awtofl.c
+[v ___awtofl __awtofl `(d  1 e 3 0 ]
+"32 /Applications/microchip/xc8/v1.30/sources/common/awtoft.c
+[v ___awtoft __awtoft `(f  1 e 3 0 ]
+"2 /Applications/microchip/xc8/v1.30/sources/common/bmul.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+"63 /Applications/microchip/xc8/v1.30/sources/common/double.c
+[v ___flpack __flpack `(d  1 e 3 0 ]
+"88 /Applications/microchip/xc8/v1.30/sources/common/fladd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"49 /Applications/microchip/xc8/v1.30/sources/common/fldiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+"50 /Applications/microchip/xc8/v1.30/sources/common/flmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 /Applications/microchip/xc8/v1.30/sources/common/flneg.c
+[v ___flneg __flneg `(d  1 e 3 0 ]
+"62 /Applications/microchip/xc8/v1.30/sources/common/float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"20 /Applications/microchip/xc8/v1.30/sources/common/flsub.c
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"43 /Applications/microchip/xc8/v1.30/sources/common/fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+"86 /Applications/microchip/xc8/v1.30/sources/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"49 /Applications/microchip/xc8/v1.30/sources/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+"51 /Applications/microchip/xc8/v1.30/sources/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"15 /Applications/microchip/xc8/v1.30/sources/common/ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+"20 /Applications/microchip/xc8/v1.30/sources/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"44 /Applications/microchip/xc8/v1.30/sources/common/fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/lbdiv.c
+[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/lbmod.c
+[v ___lbmod __lbmod `(uc  1 e 1 0 ]
+"27 /Applications/microchip/xc8/v1.30/sources/common/lbtofl.c
+[v ___lbtofl __lbtofl `(d  1 e 3 0 ]
+"27 /Applications/microchip/xc8/v1.30/sources/common/lbtoft.c
+[v ___lbtoft __lbtoft `(f  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+"30 /Applications/microchip/xc8/v1.30/sources/common/lltofl.c
+[v ___lltofl __lltofl `(d  1 e 3 0 ]
+"35 /Applications/microchip/xc8/v1.30/sources/common/lltoft.c
+[v ___lltoft __lltoft `(f  1 e 3 0 ]
+"2 /Applications/microchip/xc8/v1.30/sources/common/lmul.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/ltdiv.c
+[v ___ltdiv __ltdiv `(um  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/ltmod.c
+[v ___ltmod __ltmod `(um  1 e 3 0 ]
+"30 /Applications/microchip/xc8/v1.30/sources/common/lttofl.c
+[v ___lttofl __lttofl `(d  1 e 3 0 ]
+"30 /Applications/microchip/xc8/v1.30/sources/common/lttoft.c
+[v ___lttoft __lttoft `(f  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/common/lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"28 /Applications/microchip/xc8/v1.30/sources/common/lwtofl.c
+[v ___lwtofl __lwtofl `(d  1 e 3 0 ]
+"28 /Applications/microchip/xc8/v1.30/sources/common/lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"11 /Applications/microchip/xc8/v1.30/sources/common/memcpy.c
+[v _memcpy memcpy `(*.39v  1 e 2 0 ]
+[v i1_memcpy memcpy `(*.39v  1 e 2 0 ]
+[v i1_memcpy memcpy `(*.39v  1 e 2 0 ]
+[v i2_memcpy memcpy `(*.39v  1 e 2 0 ]
+[v i2_memcpy memcpy `(*.39v  1 e 2 0 ]
+"2 /Applications/microchip/xc8/v1.30/sources/common/tmul.c
+[v ___tmul __tmul `(um  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/common/wmul.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asfladd.c
+[v ___asfladd __asfladd `(d  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asfldiv.c
+[v ___asfldiv __asfldiv `(d  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asflmul.c
+[v ___asflmul __asflmul `(d  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asflsub.c
+[v ___asflsub __asflsub `(d  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asftadd.c
+[v ___asftadd __asftadd `(f  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asftdiv.c
+[v ___asftdiv __asftdiv `(f  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asftmul.c
+[v ___asftmul __asftmul `(f  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/asftsub.c
+[v ___asftsub __asftsub `(f  1 e 3 0 ]
+"4 /Applications/microchip/xc8/v1.30/sources/pic18/aslmul.c
+[v ___aslmul __aslmul `(ul  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v1.30/sources/pic18/d1ktcyx.c
+[v _Delay1KTCYx Delay1KTCYx `(v  1 e 0 0 ]
+"22 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcconv.c
+[v _ConvertADC ConvertADC `(v  1 e 0 0 ]
+[v i2_ConvertADC ConvertADC `(v  1 e 0 0 ]
+[v i2_ConvertADC ConvertADC `(v  1 e 0 0 ]
+"225 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcopen.c
+[v _OpenADC OpenADC `(v  1 e 0 0 ]
+"24 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcread.c
+[v _ReadADC ReadADC `(i  1 e 2 0 ]
+"18 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t0open.c
+[v _OpenTimer0 OpenTimer0 `(v  1 e 0 0 ]
+"16 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t0write.c
+[v _WriteTimer0 WriteTimer0 `(v  1 e 0 0 ]
+"43 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t1open.c
+[v _OpenTimer1 OpenTimer1 `(v  1 e 0 0 ]
+"15 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t1read.c
+[v _ReadTimer1 ReadTimer1 `(ui  1 e 2 0 ]
+"14 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t1write.c
+[v _WriteTimer1 WriteTimer1 `(v  1 e 0 0 ]
+"124 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1open.c
+[v _Open1USART Open1USART `(v  1 e 0 0 ]
+"17 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1read.c
+[v _Read1USART Read1USART `(uc  1 e 1 0 ]
+"14 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1write.c
+[v _Write1USART Write1USART `(v  1 e 0 0 ]
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+"101 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v _ToMainLow_MQ ToMainLow_MQ `S721  1 s 102 ToMainLow_MQ ]
+"124
+[v _ToMainHigh_MQ ToMainHigh_MQ `S721  1 s 102 ToMainHigh_MQ ]
+"148
+[v _FromMainLow_MQ FromMainLow_MQ `S721  1 s 102 FromMainLow_MQ ]
+"172
+[v _FromMainHigh_MQ FromMainHigh_MQ `S721  1 s 102 FromMainHigh_MQ ]
+"192
+[v _MQ_Main_Willing_to_block MQ_Main_Willing_to_block `uc  1 s 1 MQ_Main_Willing_to_block ]
+"11 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_i2c.c
+[v _Send Send `i  1 e 2 0 ]
+[s S382 __i2c_comm 76 `[22]uc 1 buffer 22 0 `uc 1 buflen 1 22 `uc 1 event_count 1 23 `uc 1 status 1 24 `uc 1 error_code 1 25 `uc 1 error_count 1 26 `[22]uc 1 outbuffer 22 27 `uc 1 outbuflen 1 49 `uc 1 outbufind 1 50 `uc 1 slave_addr 1 51 `[22]uc 1 sendBuf 22 52 `uc 1 sendBufLen 1 74 `uc 1 sendBufInd 1 75 ]
+"12
+[v _ic_ptr ic_ptr `*.39S382  1 s 2 ic_ptr ]
+[s S379 __uart_comm 23 `[22]uc 1 buffer 22 0 `uc 1 buflen 1 22 ]
+"10 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.c
+[v _uc_ptr uc_ptr `*.39S379  1 s 2 uc_ptr ]
+"21 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.h
+[v _STATE STATE `uc  1 e 1 0 ]
+"22
+[v _MSG_LEN MSG_LEN `uc  1 e 1 0 ]
+"23
+[v _MSG_REC MSG_REC `uc  1 e 1 0 ]
+"9 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/timer0_thread.c
+[v _j j `i  1 e 2 0 ]
+"10
+[v _swit swit `i  1 e 2 0 ]
+"15 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/user_interrupts.c
+[v _x x `i  1 e 2 0 ]
+"16
+[v _i i `i  1 e 2 0 ]
+"17
+[v _length length `i  1 e 2 0 ]
+"2565 /Applications/microchip/xc8/v1.30/include/pic18f46j50.h
+[v _ANCON0 ANCON0 `VEuc  1 e 1 @3912 ]
+"2626
+[v _ANCON1 ANCON1 `VEuc  1 e 1 @3913 ]
+"5969
+[v _SPBRGH1 SPBRGH1 `VEuc  1 e 1 @3967 ]
+[s S1284 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"6341
+[s S1293 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 PMA1 1 0 :1:4 
+`uc 1 PMA0 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S1302 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 PMPBE 1 0 :1:1 
+`uc 1 CTEDG1 1 0 :1:2 
+`uc 1 CTEDG2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S1311 . 1 `uc 1 RP3 1 0 :1:0 
+`uc 1 RTCC 1 0 :1:1 
+`uc 1 PMA3 1 0 :1:2 
+`uc 1 PMA2 1 0 :1:3 
+`uc 1 SCK1 1 0 :1:4 
+`uc 1 SDI1 1 0 :1:5 
+`uc 1 RP9 1 0 :1:6 
+`uc 1 RP10 1 0 :1:7 
+]
+[s S1320 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RP4 1 0 :1:1 
+`uc 1 VMO 1 0 :1:2 
+`uc 1 VPO 1 0 :1:3 
+`uc 1 SCL1 1 0 :1:4 
+`uc 1 SDA1 1 0 :1:5 
+]
+[s S1327 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 REFO 1 0 :1:2 
+`uc 1 RP6 1 0 :1:3 
+`uc 1 RP7 1 0 :1:4 
+`uc 1 RP8 1 0 :1:5 
+]
+[s S1333 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RP5 1 0 :1:2 
+]
+[s S1336 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S1339 . 1 `S1284 1 . 1 0 `S1293 1 . 1 0 `S1302 1 . 1 0 `S1311 1 . 1 0 `S1320 1 . 1 0 `S1327 1 . 1 0 `S1333 1 . 1 0 `S1336 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES1339  1 e 1 @3969 ]
+"7590
+[v _LATB LATB `VEuc  1 e 1 @3978 ]
+[s S225 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"7638
+[s S234 . 1 `uc 1 LB0 1 0 :1:0 
+]
+[s S236 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+]
+[s S239 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LB2 1 0 :1:2 
+]
+[s S242 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LB3 1 0 :1:3 
+]
+[s S245 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LB4 1 0 :1:4 
+]
+[s S248 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LB5 1 0 :1:5 
+]
+[s S251 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LB6 1 0 :1:6 
+]
+[s S254 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S257 . 1 `S225 1 . 1 0 `S234 1 . 1 0 `S236 1 . 1 0 `S239 1 . 1 0 `S242 1 . 1 0 `S245 1 . 1 0 `S248 1 . 1 0 `S251 1 . 1 0 `S254 1 . 1 0 ]
+[v _LATBbits LATBbits `VES257  1 e 1 @3978 ]
+"8321
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+[s S1259 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"8338
+[u S1268 . 1 `S1259 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES1268  1 e 1 @3987 ]
+"8727
+[v _T1GCON T1GCON `VEuc  1 e 1 @3994 ]
+[s S2354 . 1 `uc 1 T1GSS0 1 0 :1:0 
+`uc 1 T1GSS1 1 0 :1:1 
+`uc 1 T1GVAL 1 0 :1:2 
+`uc 1 T1GGO_T1DONE 1 0 :1:3 
+`uc 1 T1GSPM 1 0 :1:4 
+`uc 1 T1GTM 1 0 :1:5 
+`uc 1 T1GPOL 1 0 :1:6 
+`uc 1 TMR1GE 1 0 :1:7 
+]
+"8752
+[s S2363 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1GGO 1 0 :1:3 
+]
+[s S2366 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1DONE 1 0 :1:3 
+]
+[u S2369 . 1 `S2354 1 . 1 0 `S2363 1 . 1 0 `S2366 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES2369  1 e 1 @3994 ]
+[s S401 . 1 `uc 1 TUN 1 0 :6:0 
+`uc 1 PLLEN 1 0 :1:6 
+`uc 1 INTSRC 1 0 :1:7 
+]
+"8826
+[s S405 . 1 `uc 1 TUN0 1 0 :1:0 
+`uc 1 TUN1 1 0 :1:1 
+`uc 1 TUN2 1 0 :1:2 
+`uc 1 TUN3 1 0 :1:3 
+`uc 1 TUN4 1 0 :1:4 
+`uc 1 TUN5 1 0 :1:5 
+]
+[u S412 . 1 `S401 1 . 1 0 `S405 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES412  1 e 1 @3995 ]
+[s S182 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 PMPIF 1 0 :1:7 
+]
+"9039
+[s S191 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+]
+[s S196 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 PSPIF 1 0 :1:7 
+]
+[u S199 . 1 `S182 1 . 1 0 `S191 1 . 1 0 `S196 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES199  1 e 1 @3997 ]
+"9130
+[v _PIR1bits PIR1bits `VES199  1 e 1 @3998 ]
+"9221
+[v _IPR1bits IPR1bits `VES199  1 e 1 @3999 ]
+"10051
+[v _RCSTA1 RCSTA1 `VEuc  1 e 1 @4012 ]
+[s S1675 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"10106
+[s S1684 . 1 `uc 1 RCD8 1 0 :1:0 
+`uc 1 . 1 0 :2:1 
+`uc 1 ADEN 1 0 :1:3 
+`uc 1 . 1 0 :2:4 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S1690 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 NOT_RC8 1 0 :1:6 
+]
+[s S1693 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 nRC8 1 0 :1:6 
+]
+[s S1696 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[s S1699 . 1 `uc 1 RX9D1 1 0 :1:0 
+`uc 1 OERR1 1 0 :1:1 
+`uc 1 FERR1 1 0 :1:2 
+`uc 1 ADDEN1 1 0 :1:3 
+`uc 1 CREN1 1 0 :1:4 
+`uc 1 SREN1 1 0 :1:5 
+`uc 1 RX91 1 0 :1:6 
+`uc 1 SPEN1 1 0 :1:7 
+]
+[s S1708 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 SRENA 1 0 :1:5 
+]
+[u S1711 . 1 `S1675 1 . 1 0 `S1684 1 . 1 0 `S1690 1 . 1 0 `S1693 1 . 1 0 `S1696 1 . 1 0 `S1699 1 . 1 0 `S1708 1 . 1 0 ]
+[v _RCSTA1bits RCSTA1bits `VES1711  1 e 1 @4012 ]
+"10269
+[v _RCSTAbits RCSTAbits `VES1711  1 e 1 @4012 ]
+"10388
+[v _TXSTA1 TXSTA1 `VEuc  1 e 1 @4013 ]
+[s S1758 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"10433
+[s S1767 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[s S1771 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 NOT_TX8 1 0 :1:6 
+]
+[s S1774 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S1777 . 1 `uc 1 TX9D1 1 0 :1:0 
+`uc 1 TRMT1 1 0 :1:1 
+`uc 1 BRGH1 1 0 :1:2 
+`uc 1 SENDB1 1 0 :1:3 
+`uc 1 SYNC1 1 0 :1:4 
+`uc 1 TXEN1 1 0 :1:5 
+`uc 1 TX91 1 0 :1:6 
+`uc 1 CSRC1 1 0 :1:7 
+]
+[u S1786 . 1 `S1758 1 . 1 0 `S1767 1 . 1 0 `S1771 1 . 1 0 `S1774 1 . 1 0 `S1777 1 . 1 0 ]
+[v _TXSTA1bits TXSTA1bits `VES1786  1 e 1 @4013 ]
+"10675
+[v _TXREG1 TXREG1 `VEuc  1 e 1 @4014 ]
+"10712
+[v _RCREG1 RCREG1 `VEuc  1 e 1 @4015 ]
+"10749
+[v _SPBRG1 SPBRG1 `VEuc  1 e 1 @4016 ]
+"12290
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"12392
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+[s S1986 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"12443
+[s S1989 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 VCFG 1 0 :2:6 
+]
+[s S1994 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 VCFG0 1 0 :1:6 
+`uc 1 VCFG1 1 0 :1:7 
+]
+[s S2003 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S2006 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+]
+[s S2009 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S2012 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S2015 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 ADCAL 1 0 :1:7 
+]
+[s S2018 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S2021 . 1 `S1986 1 . 1 0 `S1989 1 . 1 0 `S1994 1 . 1 0 `S2003 1 . 1 0 `S2006 1 . 1 0 `S2009 1 . 1 0 `S2012 1 . 1 0 `S2015 1 . 1 0 `S2018 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES2021  1 e 1 @4034 ]
+"12543
+[v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
+"12562
+[v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+"12586
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
+[s S1404 . 1 `uc 1 SEN 1 0 :1:0 
+`uc 1 RSEN 1 0 :1:1 
+`uc 1 PEN 1 0 :1:2 
+`uc 1 RCEN 1 0 :1:3 
+`uc 1 ACKEN 1 0 :1:4 
+`uc 1 ACKDT 1 0 :1:5 
+`uc 1 ACKSTAT 1 0 :1:6 
+`uc 1 GCEN 1 0 :1:7 
+]
+"12866
+[s S1413 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 ADMSK1 1 0 :1:1 
+`uc 1 ADMSK2 1 0 :1:2 
+`uc 1 ADMSK3 1 0 :1:3 
+`uc 1 ADMSK4 1 0 :1:4 
+`uc 1 ADMSK5 1 0 :1:5 
+]
+[s S1420 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 ACKDT1 1 0 :1:5 
+]
+[s S1423 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 ACKEN1 1 0 :1:4 
+]
+[s S1426 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 ACKSTAT1 1 0 :1:6 
+]
+[s S1429 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 ADMSK11 1 0 :1:1 
+]
+[s S1432 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 ADMSK21 1 0 :1:2 
+]
+[s S1435 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 ADMSK31 1 0 :1:3 
+]
+[s S1438 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 ADMSK41 1 0 :1:4 
+]
+[s S1441 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 ADMSK51 1 0 :1:5 
+]
+[s S1444 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 GCEN1 1 0 :1:7 
+]
+[s S1447 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PEN1 1 0 :1:2 
+]
+[s S1450 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 RCEN1 1 0 :1:3 
+]
+[s S1453 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RSEN1 1 0 :1:1 
+]
+[s S1456 . 1 `uc 1 SEN1 1 0 :1:0 
+]
+[u S1458 . 1 `S1404 1 . 1 0 `S1413 1 . 1 0 `S1420 1 . 1 0 `S1423 1 . 1 0 `S1426 1 . 1 0 `S1429 1 . 1 0 `S1432 1 . 1 0 `S1435 1 . 1 0 `S1438 1 . 1 0 `S1441 1 . 1 0 `S1444 1 . 1 0 `S1447 1 . 1 0 `S1450 1 . 1 0 `S1453 1 . 1 0 `S1456 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES1458  1 e 1 @4037 ]
+"13005
+[v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
+[s S892 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"13148
+[s S898 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[s S903 . 1 `uc 1 SSPM01 1 0 :1:0 
+`uc 1 SSPM11 1 0 :1:1 
+`uc 1 SSPM21 1 0 :1:2 
+`uc 1 SSPM31 1 0 :1:3 
+`uc 1 CKP1 1 0 :1:4 
+`uc 1 SSPEN1 1 0 :1:5 
+`uc 1 SSPOV1 1 0 :1:6 
+`uc 1 WCOL1 1 0 :1:7 
+]
+[u S912 . 1 `S892 1 . 1 0 `S898 1 . 1 0 `S903 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES912  1 e 1 @4038 ]
+"13242
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
+[s S937 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W 1 0 :1:2 
+]
+"13922
+[s S940 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A 1 0 :1:5 
+]
+[s S943 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+[s S952 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S957 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S962 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S967 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_WRITE 1 0 :1:2 
+]
+[s S970 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_ADDRESS 1 0 :1:5 
+]
+[s S973 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S978 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[s S983 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DAT 1 0 :1:5 
+]
+[s S989 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W1 1 0 :1:2 
+]
+[s S992 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A1 1 0 :1:5 
+]
+[s S995 . 1 `uc 1 BF1 1 0 :1:0 
+`uc 1 UA1 1 0 :1:1 
+`uc 1 R_nW1 1 0 :1:2 
+`uc 1 S1 1 0 :1:3 
+`uc 1 P1 1 0 :1:4 
+`uc 1 D_nA1 1 0 :1:5 
+`uc 1 CKE1 1 0 :1:6 
+`uc 1 SMP1 1 0 :1:7 
+]
+[s S1004 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R1 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D1 1 0 :1:5 
+]
+[s S1009 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 D_A1 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 R_W1 1 0 :1:5 
+]
+[s S1014 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_W1 1 0 :1:2 
+]
+[s S1017 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_A1 1 0 :1:5 
+]
+[s S1020 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW1 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA1 1 0 :1:5 
+]
+[s S1025 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_WRITE1 1 0 :1:2 
+]
+[s S1028 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_ADDRESS1 1 0 :1:5 
+]
+[s S1031 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE1 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS1 1 0 :1:5 
+]
+[s S1036 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE1 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS1 1 0 :1:5 
+]
+[s S1041 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ1 1 0 :1:2 
+`uc 1 I2C_START1 1 0 :1:3 
+`uc 1 I2C_STOP1 1 0 :1:4 
+`uc 1 I2C_DAT1 1 0 :1:5 
+]
+[s S1047 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 DA 1 0 :1:5 
+]
+[s S1050 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 DA1 1 0 :1:5 
+]
+[s S1053 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RW 1 0 :1:2 
+]
+[s S1056 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RW1 1 0 :1:2 
+]
+[s S1059 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 START 1 0 :1:3 
+]
+[s S1062 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 START1 1 0 :1:3 
+]
+[s S1065 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 STOP 1 0 :1:4 
+]
+[s S1068 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 STOP1 1 0 :1:4 
+]
+[s S1071 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_W 1 0 :1:2 
+]
+[s S1074 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_A 1 0 :1:5 
+]
+[u S1077 . 1 `S937 1 . 1 0 `S940 1 . 1 0 `S943 1 . 1 0 `S952 1 . 1 0 `S957 1 . 1 0 `S962 1 . 1 0 `S967 1 . 1 0 `S970 1 . 1 0 `S973 1 . 1 0 `S978 1 . 1 0 `S983 1 . 1 0 `S989 1 . 1 0 `S992 1 . 1 0 `S995 1 . 1 0 `S1004 1 . 1 0 `S1009 1 . 1 0 `S1014 1 . 1 0 `S1017 1 . 1 0 `S1020 1 . 1 0 `S1025 1 . 1 0 `S1028 1 . 1 0 `S1031 1 . 1 0 `S1036 1 . 1 0 `S1041 1 . 1 0 `S1047 1 . 1 0 `S1050 1 . 1 0 `S1053 1 . 1 0 `S1056 1 . 1 0 `S1059 1 . 1 0 `S1062 1 . 1 0 `S1065 1 . 1 0 `S1068 1 . 1 0 `S1071 1 . 1 0 `S1074 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES1077  1 e 1 @4039 ]
+"14251
+[v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
+"14488
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+"14734
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+[s S2389 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 RD16 1 0 :1:1 
+`uc 1 T1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1CS 1 0 :2:6 
+]
+"14774
+[s S2396 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 TMR1CS0 1 0 :1:6 
+`uc 1 TMR1CS1 1 0 :1:7 
+]
+[s S2402 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RD161 1 0 :1:1 
+`uc 1 T1SYNC1 1 0 :1:2 
+`uc 1 T1OSCEN1 1 0 :1:3 
+`uc 1 T1CKPS01 1 0 :1:4 
+`uc 1 T1CKPS11 1 0 :1:5 
+`uc 1 TMR1CS01 1 0 :1:6 
+`uc 1 TMR1CS11 1 0 :1:7 
+]
+[s S2411 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SOSCEN 1 0 :1:3 
+]
+[s S2414 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 T1RD16 1 0 :1:7 
+]
+[u S2417 . 1 `S2389 1 . 1 0 `S2396 1 . 1 0 `S2402 1 . 1 0 `S2411 1 . 1 0 `S2414 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES2417  1 e 1 @4045 ]
+"14879
+[v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
+"14898
+[v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
+[s S29 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"14965
+[s S31 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+[s S34 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+[s S37 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+[s S40 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+[s S43 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_CM 1 0 :1:5 
+]
+[s S46 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 nCM 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 IPEN 1 0 :1:7 
+]
+[s S55 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+`uc 1 CM 1 0 :1:5 
+]
+[u S62 . 1 `S29 1 . 1 0 `S31 1 . 1 0 `S34 1 . 1 0 `S37 1 . 1 0 `S40 1 . 1 0 `S43 1 . 1 0 `S46 1 . 1 0 `S55 1 . 1 0 ]
+[v _RCONbits RCONbits `VES62  1 e 1 @4048 ]
+"15642
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+[s S732 . 1 `uc 1 SCS 1 0 :2:0 
+`uc 1 . 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+`uc 1 IDLEN 1 0 :1:7 
+]
+"15664
+[s S738 . 1 `uc 1 SCS0 1 0 :1:0 
+`uc 1 SCS1 1 0 :1:1 
+`uc 1 . 1 0 :2:2 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S745 . 1 `S732 1 . 1 0 `S738 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES745  1 e 1 @4051 ]
+"15713
+[v _T0CON T0CON `VEuc  1 e 1 @4053 ]
+[s S2262 . 1 `uc 1 T0PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 T08BIT 1 0 :1:6 
+`uc 1 TMR0ON 1 0 :1:7 
+]
+"15733
+[s S2269 . 1 `uc 1 T0PS0 1 0 :1:0 
+`uc 1 T0PS1 1 0 :1:1 
+`uc 1 T0PS2 1 0 :1:2 
+]
+[u S2273 . 1 `S2262 1 . 1 0 `S2269 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES2273  1 e 1 @4053 ]
+"15788
+[v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
+"15807
+[v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
+[s S105 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"16557
+[s S114 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S123 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S140 . 1 `S105 1 . 1 0 `S114 1 . 1 0 `S123 1 . 1 0 `S114 1 . 1 0 `S123 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES140  1 e 1 @4082 ]
+[s S1658 . 1 `uc 1 RX_NINE 1 0 :1:0 
+`uc 1 TX_NINE 1 0 :1:1 
+`uc 1 FRAME_ERROR 1 0 :1:2 
+`uc 1 OVERRUN_ERROR 1 0 :1:3 
+`uc 1 fill 1 0 :4:4 
+]
+"8 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1defs.c
+[u S1664 USART1 1 `uc 1 val 1 0 `S1658 1 . 1 0 ]
+[v _USART1_Status USART1_Status `S1664  1 e 1 0 ]
+"187 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/main.c
+[v _main main `(v  1 e 0 0 ]
+{
+"363
+[v main@msgId msgId `us  1 a 2 24 ]
+[s S382 __i2c_comm 76 `[22]uc 1 buffer 22 0 `uc 1 buflen 1 22 `uc 1 event_count 1 23 `uc 1 status 1 24 `uc 1 error_code 1 25 `uc 1 error_count 1 26 `[22]uc 1 outbuffer 22 27 `uc 1 outbuflen 1 49 `uc 1 outbufind 1 50 `uc 1 slave_addr 1 51 `[22]uc 1 sendBuf 22 52 `uc 1 sendBufLen 1 74 `uc 1 sendBufInd 1 75 ]
+"193
+[v main@ic ic `S382  1 a 76 51 ]
+"194
+[v main@msgbuffer msgbuffer `[23]uc  1 a 23 0 ]
+[s S379 __uart_comm 23 `[22]uc 1 buffer 22 0 `uc 1 buflen 1 22 ]
+"192
+[v main@uc uc `S379  1 a 23 26 ]
+"189
+[v main@length length `c  1 a 1 50 ]
+"190
+[v main@msgtype msgtype `uc  1 a 1 49 ]
+"191
+[v main@last_reg_recvd last_reg_recvd `uc  1 a 1 23 ]
+"438
+} 0
+"56 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.c
+[v _uart_write uart_write `(v  1 e 0 0 ]
+{
+[v uart_write@length length `uc  1 a 1 wreg ]
+"60
+[v uart_write@i i `uc  1 a 1 58 ]
+"56
+[v uart_write@length length `uc  1 a 1 wreg ]
+[v uart_write@msg msg `*.39uc  1 p 2 54 ]
+"58
+[v uart_write@length length `uc  1 a 1 57 ]
+"76
+} 0
+"47 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/debug.c
+[v _flipDBG flipDBG `(v  1 e 0 0 ]
+{
+[v flipDBG@b b `uc  1 a 1 wreg ]
+[v flipDBG@b b `uc  1 a 1 wreg ]
+[v flipDBG@b b `uc  1 a 1 53 ]
+"67
+} 0
+"14 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1write.c
+[v _Write1USART Write1USART `(v  1 e 0 0 ]
+{
+[v Write1USART@data data `uc  1 a 1 wreg ]
+[v Write1USART@data data `uc  1 a 1 wreg ]
+"16
+[v Write1USART@data data `uc  1 a 1 52 ]
+"24
+} 0
+"51 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.c
+[v _init_uart_recv init_uart_recv `(v  1 e 0 0 ]
+{
+[s S379 __uart_comm 23 `[22]uc 1 buffer 22 0 `uc 1 buflen 1 22 ]
+[v init_uart_recv@uc uc `*.39S379  1 p 2 52 ]
+"54
+} 0
+"194 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _init_queues init_queues `(v  1 e 0 0 ]
+{
+"200
+} 0
+"14
+[v _init_queue init_queue `(v  1 e 0 0 ]
+{
+"15
+[v init_queue@i i `uc  1 a 1 55 ]
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+"14
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v init_queue@qptr qptr `*.39S721  1 p 2 52 ]
+"22
+} 0
+"325 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_i2c.c
+[v _init_i2c init_i2c `(v  1 e 0 0 ]
+{
+[s S382 __i2c_comm 76 `[22]uc 1 buffer 22 0 `uc 1 buflen 1 22 `uc 1 event_count 1 23 `uc 1 status 1 24 `uc 1 error_code 1 25 `uc 1 error_count 1 26 `[22]uc 1 outbuffer 22 27 `uc 1 outbuflen 1 49 `uc 1 outbufind 1 50 `uc 1 slave_addr 1 51 `[22]uc 1 sendBuf 22 52 `uc 1 sendBufLen 1 74 `uc 1 sendBufInd 1 75 ]
+[v init_i2c@ic ic `*.39S382  1 p 2 52 ]
+"336
+} 0
+"341
+[v _i2c_configure_slave i2c_configure_slave `(v  1 e 0 0 ]
+{
+[v i2c_configure_slave@addr addr `uc  1 a 1 wreg ]
+[v i2c_configure_slave@addr addr `uc  1 a 1 wreg ]
+"350
+[v i2c_configure_slave@addr addr `uc  1 a 1 52 ]
+"393
+} 0
+"14 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/interrupts.c
+[v _enable_interrupts enable_interrupts `(v  1 e 0 0 ]
+{
+"20
+} 0
+"258 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _block_on_To_msgqueues block_on_To_msgqueues `(v  1 e 0 0 ]
+{
+"284
+} 0
+"40 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/interrupts.c
+[v _in_main in_main `(i  1 e 2 0 ]
+{
+"46
+} 0
+"30
+[v _in_low_int in_low_int `(i  1 e 2 0 ]
+{
+"38
+} 0
+"22
+[v _in_high_int in_high_int `(i  1 e 2 0 ]
+{
+"24
+} 0
+"222 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _check_msg check_msg `(uc  1 e 1 0 ]
+{
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v check_msg@qptr qptr `*.39S721  1 p 2 52 ]
+"224
+} 0
+"8 /Applications/microchip/xc8/v1.30/sources/pic18/d1ktcyx.c
+[v _Delay1KTCYx Delay1KTCYx `(v  1 e 0 0 ]
+{
+[v Delay1KTCYx@unit unit `uc  1 a 1 wreg ]
+[v Delay1KTCYx@unit unit `uc  1 a 1 wreg ]
+[v Delay1KTCYx@unit unit `uc  1 a 1 52 ]
+"13
+} 0
+"68 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_i2c.c
+[v _WriteI2CBuffer WriteI2CBuffer `(v  1 e 0 0 ]
+{
+[v WriteI2CBuffer@length length `uc  1 a 1 wreg ]
+"72
+[v WriteI2CBuffer@i i `us  1 a 2 57 ]
+"68
+[v WriteI2CBuffer@length length `uc  1 a 1 wreg ]
+[v WriteI2CBuffer@msg msg `*.39uc  1 p 2 52 ]
+"70
+[v WriteI2CBuffer@length length `uc  1 a 1 56 ]
+"79
+} 0
+"112 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _ToMainLow_recvmsg ToMainLow_recvmsg `(c  1 e 1 0 ]
+{
+[v ToMainLow_recvmsg@maxlength maxlength `uc  1 a 1 wreg ]
+[v ToMainLow_recvmsg@maxlength maxlength `uc  1 a 1 wreg ]
+[v ToMainLow_recvmsg@msgtype msgtype `*.39uc  1 p 2 76 ]
+[v ToMainLow_recvmsg@data data `*.39v  1 p 2 78 ]
+"118
+[v ToMainLow_recvmsg@maxlength maxlength `uc  1 a 1 80 ]
+"119
+} 0
+"135
+[v _ToMainHigh_recvmsg ToMainHigh_recvmsg `(c  1 e 1 0 ]
+{
+[v ToMainHigh_recvmsg@maxlength maxlength `uc  1 a 1 wreg ]
+[v ToMainHigh_recvmsg@maxlength maxlength `uc  1 a 1 wreg ]
+[v ToMainHigh_recvmsg@msgtype msgtype `*.39uc  1 p 2 76 ]
+[v ToMainHigh_recvmsg@data data `*.39v  1 p 2 78 ]
+"141
+[v ToMainHigh_recvmsg@maxlength maxlength `uc  1 a 1 80 ]
+"142
+} 0
+"63
+[v _recv_msg recv_msg `(c  1 e 1 0 ]
+{
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+"68
+[v recv_msg@qmsg qmsg `*.39S716  1 a 2 74 ]
+"69
+[v recv_msg@tlength tlength `ui  1 a 2 72 ]
+"64
+[v recv_msg@slot slot `uc  1 a 1 71 ]
+"63
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v recv_msg@qptr qptr `*.39S721  1 p 2 62 ]
+[v recv_msg@maxlength maxlength `uc  1 p 1 64 ]
+[v recv_msg@msgtype msgtype `*.39uc  1 p 2 65 ]
+[v recv_msg@data data `*.39v  1 p 2 67 ]
+"96
+} 0
+"11 /Applications/microchip/xc8/v1.30/sources/common/memcpy.c
+[v _memcpy memcpy `(*.39v  1 e 2 0 ]
+{
+"20
+[v memcpy@s s `*.39Cuc  1 a 2 60 ]
+"18
+[v memcpy@d d `*.39uc  1 a 2 58 ]
+"11
+[v memcpy@d1 d1 `*.39v  1 p 2 52 ]
+[v memcpy@s1 s1 `*.39Cv  1 p 2 54 ]
+[v memcpy@n n `ui  1 p 2 56 ]
+"32
+} 0
+"43 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t1open.c
+[v _OpenTimer1 OpenTimer1 `(v  1 e 0 0 ]
+{
+[v OpenTimer1@config config `uc  1 a 1 wreg ]
+[v OpenTimer1@config config `uc  1 a 1 wreg ]
+[v OpenTimer1@config1 config1 `uc  1 p 1 52 ]
+"45
+[v OpenTimer1@config config `uc  1 a 1 54 ]
+"93
+} 0
+"18 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t0open.c
+[v _OpenTimer0 OpenTimer0 `(v  1 e 0 0 ]
+{
+[v OpenTimer0@config config `uc  1 a 1 wreg ]
+[v OpenTimer0@config config `uc  1 a 1 wreg ]
+"20
+[v OpenTimer0@config config `uc  1 a 1 52 ]
+"31
+} 0
+"225 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcopen.c
+[v _OpenADC OpenADC `(v  1 e 0 0 ]
+{
+[v OpenADC@config config `uc  1 a 1 wreg ]
+[v OpenADC@config config `uc  1 a 1 wreg ]
+"226
+[v OpenADC@config2 config2 `uc  1 p 1 52 ]
+"227
+[v OpenADC@config3 config3 `ui  1 p 2 53 ]
+"229
+[v OpenADC@config config `uc  1 a 1 58 ]
+"248
+} 0
+"124 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1open.c
+[v _Open1USART Open1USART `(v  1 e 0 0 ]
+{
+[v Open1USART@config config `uc  1 a 1 wreg ]
+[v Open1USART@config config `uc  1 a 1 wreg ]
+[v Open1USART@spbrg spbrg `ui  1 p 2 52 ]
+"126
+[v Open1USART@config config `uc  1 a 1 57 ]
+"169
+} 0
+"22 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcconv.c
+[v _ConvertADC ConvertADC `(v  1 e 0 0 ]
+{
+"25
+} 0
+"130 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/interrupts.c
+[v _InterruptHandlerLow InterruptHandlerLow `IIL(v  1 e 0 0 ]
+{
+"142
+} 0
+"12 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_uart.c
+[v _uart_recv_int_handler uart_recv_int_handler `(v  1 e 0 0 ]
+{
+"49
+} 0
+"78
+[v _retrieve_command retrieve_command `(v  1 e 0 0 ]
+{
+"142
+} 0
+"47 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/debug.c
+[v i1_flipDBG flipDBG `(v  1 e 0 0 ]
+{
+[v i1flipDBG@b b `uc  1 a 1 wreg ]
+[v i1flipDBG@b b `uc  1 a 1 wreg ]
+[v i1flipDBG@b b `uc  1 a 1 1 ]
+"67
+} 0
+"17 /Applications/microchip/xc8/v1.30/sources/pic18/plib/USART/u1read.c
+[v _Read1USART Read1USART `(uc  1 e 1 0 ]
+{
+"19
+[v Read1USART@data data `uc  1 a 1 0 ]
+"39
+} 0
+"42 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/user_interrupts.c
+[v _timer1_int_handler timer1_int_handler `(v  1 e 0 0 ]
+{
+"43
+[v timer1_int_handler@result result `ui  1 a 2 27 ]
+"55
+} 0
+"14 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t1write.c
+[v _WriteTimer1 WriteTimer1 `(v  1 e 0 0 ]
+{
+[u S2296 Timers 2 `ui 1 lt 2 0 `[2]uc 1 bt 2 0 ]
+"16
+[v WriteTimer1@timer timer `S2296  1 a 2 2 ]
+"14
+[v WriteTimer1@timer1 timer1 `ui  1 p 2 0 ]
+"22
+} 0
+"103 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _ToMainLow_sendmsg ToMainLow_sendmsg `(c  1 e 1 0 ]
+{
+[v ToMainLow_sendmsg@length length `uc  1 a 1 wreg ]
+[v ToMainLow_sendmsg@length length `uc  1 a 1 wreg ]
+[v ToMainLow_sendmsg@msgtype msgtype `uc  1 p 1 22 ]
+[v ToMainLow_sendmsg@data data `*.39v  1 p 2 23 ]
+"109
+[v ToMainLow_sendmsg@length length `uc  1 a 1 25 ]
+"110
+} 0
+"24
+[v _send_msg send_msg `(c  1 e 1 0 ]
+{
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+"27
+[v send_msg@qmsg qmsg `*.39S716  1 a 2 20 ]
+"28
+[v send_msg@tlength tlength `ui  1 a 2 17 ]
+"25
+[v send_msg@slot slot `uc  1 a 1 19 ]
+"24
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v send_msg@qptr qptr `*.39S721  1 p 2 10 ]
+[v send_msg@length length `uc  1 p 1 12 ]
+[v send_msg@msgtype msgtype `uc  1 p 1 13 ]
+[v send_msg@data data `*.39v  1 p 2 14 ]
+"61
+} 0
+"11 /Applications/microchip/xc8/v1.30/sources/common/memcpy.c
+[v i1_memcpy memcpy `(*.39v  1 e 2 0 ]
+{
+[v i1memcpy@s memcpy `*.39Cuc  1 a 2 8 ]
+[v i1memcpy@d memcpy `*.39uc  1 a 2 6 ]
+[v i1memcpy@d1 d1 `*.39v  1 p 2 0 ]
+[v i1memcpy@s1 s1 `*.39Cv  1 p 2 2 ]
+[v i1memcpy@n n `ui  1 p 2 4 ]
+"32
+} 0
+"15 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t1read.c
+[v _ReadTimer1 ReadTimer1 `(ui  1 e 2 0 ]
+{
+[u S2296 Timers 2 `ui 1 lt 2 0 `[2]uc 1 bt 2 0 ]
+"17
+[v ReadTimer1@timer timer `S2296  1 a 2 2 ]
+"23
+} 0
+"84 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/interrupts.c
+[v _InterruptHandlerHigh InterruptHandlerHigh `II(v  1 e 0 0 ]
+{
+"118
+} 0
+"18 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/user_interrupts.c
+[v _timer0_int_handler timer0_int_handler `(v  1 e 0 0 ]
+{
+"37
+} 0
+"22 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcconv.c
+[v i2_ConvertADC ConvertADC `(v  1 e 0 0 ]
+{
+"25
+} 0
+"16 /Applications/microchip/xc8/v1.30/sources/pic18/plib/Timers/t0write.c
+[v _WriteTimer0 WriteTimer0 `(v  1 e 0 0 ]
+{
+[u S2296 Timers 2 `ui 1 lt 2 0 `[2]uc 1 bt 2 0 ]
+"18
+[v WriteTimer0@timer timer `S2296  1 a 2 2 ]
+"16
+[v WriteTimer0@timer0 timer0 `ui  1 p 2 0 ]
+"24
+} 0
+"153 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_i2c.c
+[v _i2c_int_handler i2c_int_handler `(v  1 e 0 0 ]
+{
+"163
+[v i2c_int_handler@error_buf error_buf `[3]uc  1 a 3 28 ]
+"158
+[v i2c_int_handler@data_read data_read `uc  1 a 1 36 ]
+"160
+[v i2c_int_handler@msg_ready msg_ready `uc  1 a 1 35 ]
+"161
+[v i2c_int_handler@msg_to_send msg_to_send `uc  1 a 1 34 ]
+"157
+[v i2c_int_handler@i2c_data i2c_data `uc  1 a 1 33 ]
+"162
+[v i2c_int_handler@overrun_error overrun_error `uc  1 a 1 32 ]
+"159
+[v i2c_int_handler@data_written data_written `uc  1 a 1 31 ]
+"320
+} 0
+"47 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/debug.c
+[v i2_flipDBG flipDBG `(v  1 e 0 0 ]
+{
+[v i2flipDBG@b b `uc  1 a 1 wreg ]
+[v i2flipDBG@b b `uc  1 a 1 wreg ]
+[v i2flipDBG@b b `uc  1 a 1 1 ]
+"67
+} 0
+"82 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/my_i2c.c
+[v _start_i2c_slave_reply start_i2c_slave_reply `(v  1 e 0 0 ]
+{
+[v start_i2c_slave_reply@length length `uc  1 a 1 wreg ]
+"114
+[v start_i2c_slave_reply@i i `uc  1 a 1 5 ]
+"82
+[v start_i2c_slave_reply@length length `uc  1 a 1 wreg ]
+[v start_i2c_slave_reply@msg msg `*.39uc  1 p 2 0 ]
+"86
+[v start_i2c_slave_reply@length length `uc  1 a 1 4 ]
+"120
+} 0
+"124
+[v _handle_start handle_start `(v  1 e 0 0 ]
+{
+[v handle_start@data_read data_read `uc  1 a 1 wreg ]
+[v handle_start@data_read data_read `uc  1 a 1 wreg ]
+[v handle_start@data_read data_read `uc  1 a 1 0 ]
+"145
+} 0
+"126 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _ToMainHigh_sendmsg ToMainHigh_sendmsg `(c  1 e 1 0 ]
+{
+[v ToMainHigh_sendmsg@length length `uc  1 a 1 wreg ]
+[v ToMainHigh_sendmsg@length length `uc  1 a 1 wreg ]
+[v ToMainHigh_sendmsg@msgtype msgtype `uc  1 p 1 22 ]
+[v ToMainHigh_sendmsg@data data `*.39v  1 p 2 23 ]
+"132
+[v ToMainHigh_sendmsg@length length `uc  1 a 1 25 ]
+"133
+} 0
+"24
+[v i2_send_msg send_msg `(c  1 e 1 0 ]
+{
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+[v i2send_msg@qmsg send_msg `*.39S716  1 a 2 20 ]
+[v i2send_msg@tlength send_msg `ui  1 a 2 17 ]
+[v i2send_msg@slot send_msg `uc  1 a 1 19 ]
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v i2send_msg@qptr qptr `*.39S721  1 p 2 10 ]
+[v i2send_msg@length length `uc  1 p 1 12 ]
+[v i2send_msg@msgtype msgtype `uc  1 p 1 13 ]
+[v i2send_msg@data data `*.39v  1 p 2 14 ]
+"61
+} 0
+"11 /Applications/microchip/xc8/v1.30/sources/common/memcpy.c
+[v i2_memcpy memcpy `(*.39v  1 e 2 0 ]
+{
+[v i2memcpy@s memcpy `*.39Cuc  1 a 2 8 ]
+[v i2memcpy@d memcpy `*.39uc  1 a 2 6 ]
+[v i2memcpy@d1 d1 `*.39v  1 p 2 0 ]
+[v i2memcpy@s1 s1 `*.39Cv  1 p 2 2 ]
+[v i2memcpy@n n `ui  1 p 2 4 ]
+"32
+} 0
+"56 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/user_interrupts.c
+[v _adc_int_handler adc_int_handler `(v  1 e 0 0 ]
+{
+"58
+[v adc_int_handler@result result `ui  1 a 2 4 ]
+"65
+} 0
+"24 /Applications/microchip/xc8/v1.30/sources/pic18/plib/ADC/adcread.c
+[v _ReadADC ReadADC `(i  1 e 2 0 ]
+{
+"27
+} 0
+"228 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v _SleepIfOkay SleepIfOkay `(v  1 e 0 0 ]
+{
+"254
+} 0
+"30 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/interrupts.c
+[v i2_in_low_int in_low_int `(i  1 e 2 0 ]
+{
+"38
+} 0
+"22
+[v i2_in_high_int in_high_int `(i  1 e 2 0 ]
+{
+"24
+} 0
+"222 /Users/apassi/Desktop/ECE-4534-master/Milestone_1/PIC_FINAL/src 2/src/messages.c
+[v i2_check_msg check_msg `(uc  1 e 1 0 ]
+{
+[s S716 __msg 25 `uc 1 full 1 0 `uc 1 length 1 1 `uc 1 msgtype 1 2 `[22]uc 1 data 22 3 ]
+[s S721 __msg_queue 102 `[4]S716 1 queue 100 0 `uc 1 cur_write_ind 1 100 `uc 1 cur_read_ind 1 101 ]
+[v i2check_msg@qptr qptr `*.39S721  1 p 2 0 ]
+"224
+} 0
+"202
+[v _enter_sleep_mode enter_sleep_mode `(v  1 e 0 0 ]
+{
+"218
+} 0
