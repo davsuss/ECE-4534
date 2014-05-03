@@ -10,7 +10,7 @@
 // I have set this to a large stack size because of (a) using printf() and (b) the depth of function calls
 //   for some of the i2c operations	-- almost certainly too large, see LCDTask.c for details on how to check the size
 #define INSPECT_STACK 1
-#define baseStack 4
+#define baseStack 6
 #if PRINTF_VERSION == 1
 #define sensorSTACK_SIZE		((baseStack+5)*configMINIMAL_STACK_SIZE)
 #else
@@ -759,24 +759,25 @@ void performLogic(uint8_t buffer [] , uint8_t length, MoveTaskStruct *moveTPtr, 
 
 //take in a buffer of sensor values, a new value, and return 1 if can use sensor value and 0 if can't 
 //and useVal is the value that should be used
-uint8_t updateSensorBuf(uint16_t *buf, uint16_t newVal, uint16_t *useVal)
+uint8_t updateSensorBuf(uint16_t *buf, uint16_t newVal)
 {
 	uint16_t sum = 0;
-	int i = 0;
-	for( i = 0; i < numOfSensorToDebounce; i++ )
+	uint16_t useVal = 0;
+	int i = numOfSensorToDebounce - 1;
+	for( i = numOfSensorToDebounce - 1; i >= 0; i-- )
 	{
 		sum += buf[i];
-		if(i < numOfSensorToDebounce - 1)
+		if(i > 0)
 		{
-			buf[i] = buf[i+1];
+			buf[i] = buf[i-1];
 		}
 		else
 		{
 			buf[i] = newVal; // push the new Value
 		}
 	}
-	(*useVal) = sum / numOfSensorToDebounce;
-	if(newVal < (*useVal)+acceptableTolerance || newVal > (*useVal)+acceptableTolerance)
+	useVal = sum / numOfSensorToDebounce;
+	if( (newVal <= ((useVal) + 2)) && (newVal >= ((useVal) - 2)) )
 	{
 		return 1;
 	}
@@ -865,15 +866,12 @@ static portTASK_FUNCTION( sensorTask, pvParameters )
                                  * Retrieve the sensor distances
                                  */
                                 uint16_t frontDistanceInches = getFrontSensorDistanceInInches(buffer, rxLen);
-								uint16_t usableFront = 0;
                                 uint16_t topRightDistanceInches = getTopRightSensorDistanceInInches(buffer, rxLen);
-								uint16_t usableSideT = 0;
                                 uint16_t bottomRightDistanceInches = getBottomRightSensorDistanceInInches(buffer, rxLen);
-								uint16_t usableSideB = 0;
 
-								uint8_t canFront = updateSensorBuf(frontBuf, frontDistanceInches, &usableFront);
-								uint8_t canSideT = updateSensorBuf(sideTopBuf, topRightDistanceInches, &usableSideT);
-								uint8_t canSideB = updateSensorBuf(sideBottomBuf, bottomRightDistanceInches, &usableSideB);
+								uint8_t canFront = updateSensorBuf(frontBuf, frontDistanceInches);
+								uint8_t canSideT = updateSensorBuf(sideTopBuf, topRightDistanceInches);
+								uint8_t canSideB = updateSensorBuf(sideBottomBuf, bottomRightDistanceInches);
 
 								uint8_t rightFeet = getRightFeet(buffer, rxLen);
 								uint8_t rightInches = getRightInches(buffer, rxLen);
@@ -883,8 +881,8 @@ static portTASK_FUNCTION( sensorTask, pvParameters )
 //								printf("rightF = %d, rightI = %d, leftF = %d, leftI = %d\n", rightFeet, rightInches, leftFeet
 //										, leftInches);
 
-								if ( !canFront && !canSideT && !canSideB){
-									return;
+								if ( canFront != 1 ||  canSideT != 1 || canSideB != 1){
+									break;
 								}
 
 
@@ -894,8 +892,8 @@ static portTASK_FUNCTION( sensorTask, pvParameters )
                                 printf("TR %d\n", topRightDistanceInches);
                                 printf("BR %d\n", bottomRightDistanceInches);
                                 
-                                SendWebServerSensorData(webServerData, usableFront,
-                                                        usableSideT,usableSideB, 0);
+                                SendWebServerSensorData(webServerData,frontDistanceInches,
+                                                        topRightDistanceInches,bottomRightDistanceInches, 0);
                                 
                                 
                                 performLogic(buffer , rxLen, moveTPtr, sensorT);

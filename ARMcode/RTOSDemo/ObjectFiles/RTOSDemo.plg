@@ -28,9 +28,6 @@ compiling main.c...
 compiling mapTask.c...
 MainFiles/mapTask.c: In function 'startMapTask':
 MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
 compiling moveTask.c...
 MainFiles/moveTask.c: In function 'startMoveTask':
 MainFiles/moveTask.c(73): warning: implicit declaration of function 'GPIO_SetDir'
@@ -42,9 +39,9 @@ MainFiles/moveTask.c(103): warning: control reaches end of non-void function
 compiling myTimers.c...
 compiling sensorAnalyzer.c...
 MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
-MainFiles/sensorAnalyzer.c(66): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
 MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(735): warning: unused variable 'count'
+MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
 compiling rovermessageparser.c...
 compiling roverKinematics.c...
 compiling syscalls.c...
@@ -122,20 +119,13 @@ compiling lpc17xx_ssp.c...
 ../NXPDrivers/source/lpc17xx_ssp.c(345): warning: 'wdata16' may be used uninitialized in this function
 compiling vtI2C.c...
 linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 47 Warning(s).
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 45 Warning(s).
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
+Internal DLL Error
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Internal DLL Error
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Internal DLL Error
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
 Full Chip Erase Done.
 Programming Done.
@@ -143,9 +133,25 @@ Verify OK.
 Build target 'WebServerELF'
 compiling sensorAnalyzer.c...
 MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
-MainFiles/sensorAnalyzer.c(66): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
 MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(735): warning: unused variable 'count'
+MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
 linking...
 ".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
@@ -153,138 +159,145 @@ Full Chip Erase Done.
 Programming Done.
 Verify OK.
 Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
-Build target 'WebServerELF'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
-Build target 'WebServerELF'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-compiling sensorAnalyzer.c...
-MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
-MainFiles/sensorAnalyzer.c(66): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(754): warning: unused variable 'count'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 5 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Internal DLL Error
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
-compiling roverKinematics.c...
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
-Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(289): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(275): warning: unused variable 'position'
 compiling sensorAnalyzer.c...
 MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
 MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
 MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(774): warning: unused variable 'count'
+MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
 linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 5 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Internal DLL Error
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Build target 'WebServerELF'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
 Full Chip Erase Done.
 Programming Done.
 Verify OK.
 Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/mapTask.c: In function 'generateDummyMap':
-MainFiles/mapTask.c(290): warning: suggest parentheses around comparison in operand of '&'
-MainFiles/mapTask.c(276): warning: unused variable 'position'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(895): error: 'usableFront' undeclared (first use in this function)
+MainFiles/sensorAnalyzer.c(895): error: note: each undeclared identifier is reported only once for each function it appears in
+MainFiles/sensorAnalyzer.c(896): error: 'usableSideT' undeclared (first use in this function)
+MainFiles/sensorAnalyzer.c(896): error: 'usableSideB' undeclared (first use in this function)
+MainFiles/sensorAnalyzer.c(806): warning: unused variable 'count'
+Target not created
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(895): error: 'usableFront' undeclared (first use in this function)
+MainFiles/sensorAnalyzer.c(895): error: note: each undeclared identifier is reported only once for each function it appears in
+MainFiles/sensorAnalyzer.c(896): error: 'usableSideT' undeclared (first use in this function)
+MainFiles/sensorAnalyzer.c(896): error: 'usableSideB' undeclared (first use in this function)
+MainFiles/sensorAnalyzer.c(806): warning: unused variable 'count'
+Target not created
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(806): warning: unused variable 'count'
 linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
 Full Chip Erase Done.
 Programming Done.
 Verify OK.
 Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(807): warning: unused variable 'count'
 linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 1 Warning(s).
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Build target 'WebServerELF'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
 Full Chip Erase Done.
 Programming Done.
 Verify OK.
 Build target 'WebServerELF'
-compiling roverKinematics.c...
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(807): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Full Chip Erase Done.
+Programming Failed!
+Cannot access Memory
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(808): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(810): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(810): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Build target 'WebServerELF'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(806): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Build target 'WebServerELF'
+compiling sensorAnalyzer.c...
+MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
+MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
+MainFiles/sensorAnalyzer.c: In function 'sensorTask':
+MainFiles/sensorAnalyzer.c(806): warning: unused variable 'count'
+linking...
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
+Build target 'WebServerELF'
 linking...
 ".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
 Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
@@ -296,52 +309,10 @@ Full Chip Erase Done.
 Programming Done.
 Verify OK.
 Build target 'WebServerELF'
-compiling mapTask.c...
-MainFiles/mapTask.c: In function 'startMapTask':
-MainFiles/mapTask.c(98): warning: implicit declaration of function 'GPIO_SetDir'
 compiling sensorAnalyzer.c...
 MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
 MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
 MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(774): warning: unused variable 'count'
-compiling roverKinematics.c...
+MainFiles/sensorAnalyzer.c(806): warning: unused variable 'count'
 linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 3 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling roverKinematics.c...
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 0 Warning(s).
-Load "C:\\ARMCode\\RTOSDemo\\ObjectFiles\\RTOSDemo.ELF" 
-Full Chip Erase Done.
-Programming Done.
-Verify OK.
-Build target 'WebServerELF'
-compiling sensorAnalyzer.c...
-MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
-MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/sensorAnalyzer.c: In function 'updateSensorBuf':
-MainFiles/sensorAnalyzer.c(778): warning: assignment makes pointer from integer without a cast
-MainFiles/sensorAnalyzer.c(779): warning: comparison between pointer and integer
-MainFiles/sensorAnalyzer.c(779): warning: comparison between pointer and integer
-MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(876): warning: unused variable 'canSideB'
-MainFiles/sensorAnalyzer.c(875): warning: unused variable 'canSideT'
-MainFiles/sensorAnalyzer.c(874): warning: unused variable 'canFront'
-MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 8 Warning(s).
-Build target 'WebServerELF'
-compiling sensorAnalyzer.c...
-MainFiles/sensorAnalyzer.c: In function 'startSensorTask':
-MainFiles/sensorAnalyzer.c(68): warning: implicit declaration of function 'GPIO_SetDir'
-MainFiles/sensorAnalyzer.c: In function 'sensorTask':
-MainFiles/sensorAnalyzer.c(876): warning: unused variable 'canSideB'
-MainFiles/sensorAnalyzer.c(875): warning: unused variable 'canSideT'
-MainFiles/sensorAnalyzer.c(874): warning: unused variable 'canFront'
-MainFiles/sensorAnalyzer.c(805): warning: unused variable 'count'
-linking...
-".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 5 Warning(s).
+".\ObjectFiles\RTOSDemo.elf" - 0 Error(s), 2 Warning(s).
