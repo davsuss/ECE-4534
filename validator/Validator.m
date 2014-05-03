@@ -3,11 +3,13 @@
 function [] = Validator(serial_port, xmlFile)
 warning off;
 
+%pt = convertCoordinate([4,0], [3,4],45);
+
 %getFromARM(serial_port);
 %sendToARM(0, 3, [12, 12, 12], [50, 78], serial_port);
 
 [rm, obst, st, fin, rov]  = xmlToMap(xmlFile);
-distances = uint16(zeros(1,2)); % (right, left) rotations
+distances = double(zeros(1,2)); % (right, left) rotations
 constants = struct('msgID_sensorReq', uint8(0), 'msgID_sensorReq2', uint8(1), 'msgID_cmd', uint8(2), ...
     'cmdID_start', uint8(0), 'cmdID_stop', uint8(1), 'cmdID_slow', uint8(2), 'cmdID_fast', uint8(3), ...
     'tID_straight', uint8(0), 'tID_left', uint8(1), 'tID_right', uint8(2), 'rState_free', uint8(0), ...
@@ -51,6 +53,7 @@ for i = 1:(length(state.Obstacles)/5)
     pos = pos + 4;
 end
 %-----------------------------------------
+%state = executeCmd([0 0 1 0], state, possibleObstacles, serial_port);
 %replyToArm(state, possibleObstacles, serial_port);
 %obstHit(state, [48, 48], [52, 48], possibleObstacles, 0, state.Rover.ref);
 %rfidModel([48, 48], [30, 48], state, 180);
@@ -60,16 +63,16 @@ end
 % state.Rover.orientation = newO;
 %executeCmd([0 0 9 0], state, possibleObstacles, serial_port);
 %le = sonarModel(30)
+%roverModel(state, 9, -9, 0);
 %-----------------------------------------
 badMsgs = 0;
 done = false;
 draw(state, path(1:differentPathCmds, 1:4));
 b = 0;
 l = 1;
-fclose(serial_port);
-fopen(serial_port);
-% for j = 1:10
-% [state, pth, ok] = executeCmd([0 0 1 0; 0 0 1 0; 0 0 1 0], state, possibleObstacles, serial_port);
+
+% for j = 1:4
+% [state, pth, ok] = executeCmd([0 0 1 8; 1 90 0 0], state, possibleObstacles, serial_port);
 %  s = size(pth);
 %  lastEnd_rov = [path(differentPathCmds,4), 0];%end in rover coordinates
 %  lastEnd = convertCoordinate(lastEnd_rov, path(differentPathCmds,1:2), path(differentPathCmds,3));
@@ -85,17 +88,18 @@ fopen(serial_port);
 %  draw(state, path(1:differentPathCmds, 1:4));
 %  pause(1);
 % end
-draw(state, path(1:differentPathCmds, 1:4));
+% draw(state, path(1:differentPathCmds, 1:4));
+fclose(serial_port);
+fopen(serial_port);
 disp('wait');
 pause(1);
 disp('go!');
 total_t = clock();
+flushinput(serial_port);
+timesLineSeen = 0;
 while done == false
     time1 = clock();
-    [msgGood, ID, num, cmd] = getFromARM(serial_port)
-    l = l + 1;
-%     ID = 2;
-%     msgGood = 1;
+    [msgGood, ID, num, cmd] = getFromARM(serial_port);
     if (msgGood == 1)        
         switch ID
             case 0
@@ -105,6 +109,12 @@ while done == false
                 disp('yo');
             case 2
                 [state, pth, ok] = executeCmd(cmd, state, possibleObstacles, serial_port);
+                if( state.rovState == state.constIDs.rState_seenSt )
+                    draw(state, path(1:differentPathCmds, 1:4));
+                    timesLineSeen = timesLineSeen + 1
+                    pause(0.5);
+                    flushinput(serial_port);
+                end
                 disp('rcvdCMD');
                 s = size(pth);
                 lastEnd_rov = [path(differentPathCmds,4), 0];%end in rover coordinates
@@ -117,12 +127,15 @@ while done == false
                         path(differentPathCmds,1:4) = pth(i, 1:4);
                     end
                 end
-                if( ok == 0 )
+                if( ok == 0 || timesLineSeen == 3 )
                     done = true;
                 end
             case 3
                 sendToARM(3, 0, 0, [0 0 0 0], serial_port);%send back an ack
                 done = true;
+            case 4
+                sendToARM(3, 0, 0, [0 0 0 0], serial_port);%send back an ack
+                disp('received start');
             otherwise
                 disp('Problem with ID');
                 badMsgs = badMsgs + 1;
@@ -131,14 +144,12 @@ while done == false
         badMsgs = badMsgs + 1;
     end
     time2 = clock();
-    elapsed = etime(time2, time1)
-    pause(1);
-    draw(state, path(1:differentPathCmds, 1:4));
+    elapsed = etime(time2, time1);
 end
 endT = clock();
 totalTimeElapsed = etime(endT, total_t);
 draw(state, path(1:differentPathCmds, 1:4));
-fclose(serial_port);
+%fclose(serial_port);
 end
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
@@ -184,10 +195,18 @@ function [] = draw(state, path)
         end
     else
         s = size(path);
-        for i = 2:s(1)
-            lastEnd_rov = [path(i,1), path(i,2)];
-            lastEnd = [path(i-1,1), path(i-1,2)];
-            line([lastEnd_rov(1) lastEnd(1)], [lastEnd_rov(2) lastEnd(2)]);
+        for i = 1:s(1)
+            if( path(i, 4) ~= 0 )
+                lastEnd_rov = [path(i,4), 0];%end in rover coordinates
+                lastEnd = convertCoordinate(lastEnd_rov, path(i,1:2), path(i,3));
+                line([path(i,1) lastEnd(1)], [path(i,2) lastEnd(2)]);
+            else
+                if( i ~= s(1) )
+                    lastEnd_rov = [path(i+1,1), path(i+1,2)];
+                    lastEnd = [path(i,1), path(i,2)];
+                    line([lastEnd_rov(1) lastEnd(1)], [lastEnd_rov(2) lastEnd(2)]);
+                end
+            end    
         end
     end
 end
@@ -272,7 +291,7 @@ function [newLoc, newO, rightTrav, leftTrav] = roverModel(st, distance_right, di
     
     cur_pose = double([0, 0, 0]'); %move the center of the rover
     
-    if( R ~= Inf && R ~= -Inf && distance_right ~= 0 && distance_left ~= 0 )    
+    if( R ~= Inf && R ~= -Inf && ((distance_right > 0 && distance_left < 0) || (distance_left > 0 && distance_right < 0)) )    
         c = cos(thetaTravelled);
         s = sin(thetaTravelled);
         Transform = [c -s 0; s c 0; 0 0 1];
@@ -285,6 +304,8 @@ function [newLoc, newO, rightTrav, leftTrav] = roverModel(st, distance_right, di
     else
         Res = zeros(3,1);
         ptMap = convertCoordinate([distance_right, 0], state.Rover.ref, state.Rover.orientation);
+        right = double(distance_right);
+        left = double(distance_left);
     end
     rightTrav = right;
     leftTrav = left;
@@ -345,8 +366,8 @@ function [closest] = obstDistRover(state, possible_obst)
     d_ir2 = calcDist(ir2p1, ir2p2);
     d_son = calcDist(sonp1, sonp2);
     
-    rov_ir1 = struct('base', ir1p1, 'dir', ir1p2);
-    rov_ir2 = struct('base', ir2p1, 'dir', ir2p2);
+    rov_ir1 = struct('base', ir2p1, 'dir', ir2p2);
+    rov_ir2 = struct('base', ir1p1, 'dir', ir1p2);
     rov_son = struct('base', sonp1, 'dir', sonp2);
    
     init = sqrt(state.Room.len^2 + state.Room.wid^2 ); 
@@ -482,7 +503,7 @@ function [updatedState] = replyToArm(st, possible_obst, serial_port)
     closest = obstDistRover(st, possible_obst);
     
     for i = 1:numOfFrontSamples
-        front(1, i) = sonarModel(closest.Front.dist);
+        front(1, i) = ir_redModel(closest.Front.dist);
         disp('Front inches = '); 
         disp(closest.Front.dist);
         disp('Front sensor = '); 
@@ -503,7 +524,7 @@ function [updatedState] = replyToArm(st, possible_obst, serial_port)
     end
 
     sendToARM(id, numOfFrontSamples + 2*numOfSideSamples, [front, side1, side2], state.Distance, serial_port);
-    state.Distance = [0 0];
+    state.Distance = double([0 0]);
     updatedState = state;
 end
 
@@ -545,6 +566,7 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
                 switch(turnID)
                     case st.constIDs.tID_straight
                         %go straight
+                        disp('straight');
                         [newLoc, newO, rightTrav, leftTrav] = roverModel(state, dist, dist, 3);
                     case st.constIDs.tID_left
                         %left - Clock
@@ -569,7 +591,7 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
         [willHit, obstHitLoc, dToObst] = obstHit(state, rov_ref, newLoc, possible_obst, newO, rov_ref);        
         %check for start/finish hit
         [rfidResult, StFinLocToStop, dToSTFin] = rfidModel(rov_ref, newLoc, state, newO);
-        dist = sqrt(state.Room.len^2 + state.Room.wid^2 );% init to longest possible distance
+        dist = sqrt(state.Room.len^2 + state.Room.wid^2 );% init to longest possible distance        
         if( willHit == true )
             if( dToObst < dist )
                 disp('Obst Hit');
@@ -577,8 +599,9 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
                 [newLoc, newO, rightTrav, leftTrav] = roverModel(state, dToObst, dToObst, 3);
             end
         end
-        if( rfidResult == true )
-            if( dToSTFin < dist && state.rovState ~= state.constIDs.rState_seenSt )
+        if( rfidResult == true && state.rovState ~= state.constIDs.rState_seenSt)
+            if( dToSTFin < dist  )
+                disp('Start Hit');
                 state.rovState = state.constIDs.rState_seenSt;
                 dist = dToSTFin;                
                 [newLoc, newO, rightTrav, leftTrav] = roverModel(state, dToSTFin, dToSTFin, 3);
@@ -586,6 +609,10 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
                 if(state.rovState == state.constIDs.rState_seenSt)
                     state.rovState = state.constIDs.rState_free;
                 end
+            end
+        else
+            if(state.rovState == state.constIDs.rState_seenSt)
+                state.rovState = state.constIDs.rState_free;
             end
         end
         
@@ -606,11 +633,7 @@ function [updated_state, path, ok] = executeCmd(commands, st, possible_obst, ser
             differentPathCmds = differentPathCmds + 1;
             pth(differentPathCmds, 1:4) = [state.Rover.ref state.Rover.orientation 0];
         end
-        
-        %calculate rotations
-        rotRight = convToRot(rightTrav,rov_wheelRad);
-        rotLeft = convToRot(leftTrav,rov_wheelRad);
-        state.Distance = uint16(state.Distance) + uint16([rightTrav, leftTrav]);        
+        state.Distance = state.Distance + abs([rightTrav, leftTrav]);        
     end
     
     %send an ack
@@ -648,8 +671,10 @@ MSnibble_mask = 240;%mask for the least sig nibble
 MSBytemask = uint16(65280);
 LSBytemask = uint16(255);%mask for the most sig nibble
 
-while serial_port.BytesAvailable < 1 % wait for the buffer to receive atleast 2 bytes (count and ID)  
+while serial_port.BytesAvailable < 2 % wait for the buffer to receive atleast 2 bytes (count and ID)  
 end
+
+bytes = serial_port.BytesAvailable;
 
 rollingSum = 0; %for the checksum
 
@@ -729,7 +754,7 @@ function [] = sendToARM(msgID, numOfSamples, Samples, Distances, serial_port)
     message(1, index_motor_begin: index_motor_end) = distData_parsed; %add the motor rotations
     rollingSum = sum(message);
     message(1, index_motor_end + 1) = bitand(rollingSum, LSBytemask); % take the LSByte of the total 
-    message
+    %message
     fwrite(serial_port, message, 'uchar');
     %fclose( serial_port );
 end
