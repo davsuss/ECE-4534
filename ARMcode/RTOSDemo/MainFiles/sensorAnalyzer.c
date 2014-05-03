@@ -894,9 +894,8 @@ static portTASK_FUNCTION( sensorTask, pvParameters )
                                 
                                 SendWebServerSensorData(webServerData,frontDistanceInches,
                                                         topRightDistanceInches,bottomRightDistanceInches, 0);
-                                
-                                
-                                performLogic(buffer , rxLen, moveTPtr, sensorT);
+
+				performLogic(buffer , rxLen, moveTPtr, sensorT);
                                 
 								break;
 							}
