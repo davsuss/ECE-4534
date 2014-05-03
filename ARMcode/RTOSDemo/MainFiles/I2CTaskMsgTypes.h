@@ -10,9 +10,14 @@
 //This is the acutal length desired to be transmitted over I2C
 #define BYTES_I2C 13
 // msgTypes from debugging - the ones that go through the vtI2C
+
+// Sensor 1 is an actual request that should go to the rover
 #define sensor1 1
+
+// Sensor 2 is 
 #define sensor2 2
 #define cmdSend 3
+
 
 //#define vtI2CMsgTypeTempInit 1
 //#define vtI2CMsgTypeTempRead1 2

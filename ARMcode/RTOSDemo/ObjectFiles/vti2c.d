@@ -37,4 +37,4 @@ ObjectFiles/vti2c.o: ../vtCode/vtI2C/vtI2C.c \
  ../FreeRTOS/Source/include/task.h ../FreeRTOS/Source/include/list.h \
  ../FreeRTOS/Source/include/projdefs.h \
  ../NXPDrivers/include/lpc17xx_libcfg_default.h \
- ../NXPDrivers/include/lpc17xx_pinsel.h MainFiles/debugPins.h
+ ../NXPDrivers/include/lpc17xx_pinsel.h

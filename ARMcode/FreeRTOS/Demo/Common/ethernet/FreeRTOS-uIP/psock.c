@@ -248,6 +248,8 @@ PT_THREAD( psock_generator_send ( register struct psock *s, unsigned short ( *ge
 	s->sendlen = generate( arg );
 	s->sendptr = uip_appdata;
 
+	printf("s->sendptr %s\n", s->sendptr);
+
 	s->state = STATE_NONE;
 	do
 	{

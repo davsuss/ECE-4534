@@ -78,6 +78,8 @@ extern "C" {
 
 #define tskKERNEL_VERSION_NUMBER "V7.0.1"
 
+#define configGENERATE_MAP				1
+
 /**
  * task. h
  *
@@ -1062,6 +1064,8 @@ void vTaskList( signed char *pcWriteBuffer ) PRIVILEGED_FUNCTION;
  * \ingroup TaskUtils
  */
 void vTaskGetRunTimeStats( signed char *pcWriteBuffer ) PRIVILEGED_FUNCTION;
+
+void vTaskGetMapStats( signed char *pcWriteBuffer ) PRIVILEGED_FUNCTION;
 
 /**
  * task. h

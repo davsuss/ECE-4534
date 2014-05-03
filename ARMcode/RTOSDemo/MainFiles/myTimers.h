@@ -10,6 +10,8 @@
 /* include files. */
 #include "vtUtilities.h"
 #include "moveTask.h"
+#include "mapTask.h"
 
-void startTimerForTemperature(MoveTaskStruct *moveT);
+void startTimer(MoveTaskStruct *moveT);
+void startMapTimer(mapTStruct *mapT);
 #endif

@@ -327,9 +327,9 @@
           <GroupName>MainSource</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>webservertask.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\MainFiles/main.c</FilePath>
+              <FilePath>.\MainFiles/webservertask.c</FilePath>
             </File>
             <File>
               <FileName>vtUtilities.c</FileName>
@@ -342,24 +342,19 @@
               <FilePath>../FreeRTOS/Demo/CORTEX_LPC1768_GCC_Rowley/ParTest.c</FilePath>
             </File>
             <File>
-              <FileName>LCDtask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\MainFiles/LCDtask.c</FilePath>
-            </File>
-            <File>
-              <FileName>myTimers.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\MainFiles/myTimers.c</FilePath>
-            </File>
-            <File>
               <FileName>debugPins.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\MainFiles/debugPins.c</FilePath>
             </File>
             <File>
-              <FileName>sensorAnalyzer.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\MainFiles/sensorAnalyzer.c</FilePath>
+              <FilePath>.\MainFiles/main.c</FilePath>
+            </File>
+            <File>
+              <FileName>mapTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MainFiles/mapTask.c</FilePath>
             </File>
             <File>
               <FileName>moveTask.c</FileName>
@@ -367,9 +362,24 @@
               <FilePath>.\MainFiles/moveTask.c</FilePath>
             </File>
             <File>
-              <FileName>mapTask.c</FileName>
+              <FileName>myTimers.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\MainFiles/mapTask.c</FilePath>
+              <FilePath>.\MainFiles/myTimers.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensorAnalyzer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MainFiles/sensorAnalyzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>rovermessageparser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MainFiles/rovermessageparser.c</FilePath>
+            </File>
+            <File>
+              <FileName>roverKinematics.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MainFiles/roverKinematics.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -604,11 +614,6 @@
               <FileName>lpc17xx_ssp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../NXPDrivers/source/lpc17xx_ssp.c</FilePath>
-            </File>
-            <File>
-              <FileName>lpc17xx_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../NXPDrivers/source/lpc17xx_uart.c</FilePath>
             </File>
           </Files>
         </Group>

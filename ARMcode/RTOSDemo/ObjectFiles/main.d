@@ -40,6 +40,9 @@ ObjectFiles/main.o: MainFiles/main.c \
  ../FreeRTOS/Source/include/semphr.h ../FreeRTOS/Source/include/queue.h \
  ../vtCode/vtI2C/vtI2C.h ../NXPDrivers/include/lpc17xx_i2c.h \
  ../NXPDrivers/include/lpc_types.h ../FreeRTOS/Source/include/projDefs.h \
- MainFiles/I2CTaskMsgTypes.h MainFiles/myTimers.h \
- ../FreeRTOS/Source/include/timers.h MainFiles/sensorAnalyzer.h \
- MainFiles/mapTask.h ../SystemFiles/syscalls.h ../LPCUSB/extUSB.h
+ MainFiles/I2CTaskMsgTypes.h MainFiles/communicationConstants.h \
+ MainFiles/myTimers.h ../FreeRTOS/Source/include/timers.h \
+ MainFiles/mapTask.h MainFiles/webservertask.h \
+ ../FreeRTOS/Source/include/queue.h MainFiles/roverKinematics.h \
+ MainFiles/sensorAnalyzer.h ../SystemFiles/syscalls.h ../LPCUSB/extUSB.h \
+ MainFiles/debugPins.h

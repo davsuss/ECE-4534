@@ -254,16 +254,32 @@ extern void vParTestSetLEDState( long lState );
 	/* Process the form input sent by the IO page of the served HTML. */
 
 	c = strstr( pcInputString, "?" );
+	//printf("pcInputString %s\n", pcInputString);
+	//printf("C %s\n", c);
+
+
     if( c )
     {
+		if( strstr( c, "START=START") != NULL)
+		{
+			vParTestSetLEDState( pdTRUE );
+			SendRoverStartCommand();
+		}
+
+		else if( strstr( c, "STOP=STOP") != NULL)
+		{
+			vParTestSetLEDState( pdFALSE );
+			SendRoverStopCommand();
+		}
 		/* Turn the FIO1 LED's on or off in accordance with the check box status. */
-		if( strstr( c, "LED0=1" ) != NULL )
+		else if( strstr( c, "LED0=1" ) != NULL )
 		{
 			vParTestSetLEDState( pdTRUE );
 		}
+
 		else
 		{
-			vParTestSetLEDState( pdFALSE );
+			//vParTestSetLEDState( pdFALSE );
 		}
     }
 }

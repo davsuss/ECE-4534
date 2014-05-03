@@ -2,27 +2,53 @@
 <html>
   <head>
     <title>FreeRTOS.org uIP WEB server demo</title>
+    <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+	<link href = "bootstrap.min.css" rel = "stylesheet">
   </head>
   <BODY>
-<font face="arial">
-<a href="index.shtml">Task Stats</a> <b>|</b> <a href="runtime.shtml">Run Time Stats</a> <b>|</b> <a href="stats.shtml">TCP Stats</a> <b>|</b> <a href="tcp.shtml">Connections</a> <b>|</b> <a href="http://www.freertos.org/">FreeRTOS.org Homepage</a> <b>|</b> <a href="io.shtml">IO</a>
-<br><p>
-<hr>
-<b>LED and LCD IO</b><br>
 
-<p>
+  		<!-- Fixed navbar -->
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Team 8 is the best!</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="index.shtml">Task Stats</a></li>
+	            <li><a href="runtime.shtml">Run Time Stats</a> </li>
+	            <li><a href="stats.shtml">TCP Stats</a></li>
+	            <li><a href="tcp.shtml">Connections</a></li>
+	            <li><a href="io.shtml">IO</a></li>
+	            <li><a href="map.shtml">MAP</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
 
-Use the check box to turn on or off the LED, enter text to display on the OLED display, then click "Update IO".
+	    <div class="container theme-showcase" role="main">
 
-
-<p>
-<form name="aForm" action="/io.shtml" method="get">
-%! led-io
-<p>
-<input type="submit" value="Update IO">
-</form>
-<br><p>
-</font>
+			<font face="arial">
+			<br><br>
+				<div class="jumbotron">
+					<h1>LED and LCD IO</h1><br>
+					<p>Use the check box to turn on or off the LED, enter text
+						to display on the OLED display, then click "Update IO".<p>
+				</div>
+			<form name="aForm" method="get">
+			%! led-io
+			<p>
+			<input type="submit" class="btn btn-success btn-lg" value="Update IO">
+			</form>
+			<br><p>
+			</font>
+		</div>
 </body>
 </html>
 

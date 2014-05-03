@@ -1,0 +1,468 @@
+<html>
+	<head>
+		<title>Arjun Passi</title>
+		<meta name ="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv='cache-control' content='no-cache'>
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+		<link href = "bootstrap.min.css" rel = "stylesheet">
+		<link href = "drag.css" rel = "stylesheet">
+		<script language="javascript" type="text/javascript"></script>
+	</head>
+	 <BODY>
+
+	 		<!-- Fixed navbar -->
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Team 8 is the best!</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="index.shtml">Task Stats</a></li>
+	            <li><a href="runtime.shtml">Run Time Stats</a> </li>
+	            <li><a href="stats.shtml">TCP Stats</a></li>
+	            <li><a href="tcp.shtml">Connections</a></li>
+	            <li><a href="io.shtml">IO</a></li>
+	            <li><a href="map.shtml">MAP</a></li>
+			<li><a href="sensorcmd.shtml">Sensor</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
+
+	    <div class="container theme-showcase" role="main">
+		    <div class="jumbotron">
+		    	<p></p>
+		    	<div class="pull-right">
+	        		<img src="rover.jpg" class="img-circle" height=170 width=170>
+	        	</div>
+	        	<h1>Map!</h1>
+	        	<p>Find out where the rover has travelled and even control it!</p>
+
+	      	</div>
+
+			<font face="arial">
+				<button onclick="startPress()" class="btn btn-success btn-lg">START</button>
+				<button onclick="stopPress()" class="btn btn-danger btn-lg">STOP</button>
+				<button onclick="clearSensorCommand()" class="btn btn-info btn-lg">Clear Log</button>
+				
+			</font>
+			
+			<div class="resizable" id="sensor_commands" ondblclick="clearSensorCommand()" 
+onmousedown="tzdragg.startMoving(event);" onmouseup="tzdragg.stopMoving();" style="top: 600px; left: 500px;">
+			</div>
+
+			<style>
+				#sensor_commands {
+				    height: 300px;
+				    width:700px;
+				    border:1px solid #ccc;
+				    font:16px/26px Georgia, Garamond, Serif;
+				    overflow:scroll;
+				    background-color:#ff746f;
+				    color:#FFFFFF;
+				    position: absolute;
+				    -webkit-user-select: none;
+	                -moz-user-select: none;
+	                -o-user-select: none;
+	                -ms-user-select: none;
+	                -khtml-user-select: none;     
+	                user-select: none;
+	                cursor: default;
+				}
+				.resizable {
+    resize: both;   /* Options: horizontal, vertical, both */
+    overflow: auto; /* fix for Safari */
+}
+
+			</style>
+
+<br><br><br>
+			<div class="alert alert-success" id="distTime">
+			</div><br>
+
+			<div>
+				<canvas id="canvasForMessage" width="500" height="40"></canvas>
+			</div>
+			<br>
+			
+			%! map
+<canvas id="canvas" width="100" height="100"></canvas>
+
+					<br><br><br><br>
+
+
+
+		
+		<script>
+
+				function clearSensorCommand(){
+					localStorage.sensorvalues = "";
+					document.getElementById('sensor_commands').innerHTML = localStorage.sensorvalues;
+				}
+
+				
+
+				function startPress(){
+					var xhr = new XMLHttpRequest();
+					xhr.onreadystatechange = function() {
+					    if (xhr.readyState == 4) {
+					    }
+					}
+					xhr.open('GET', 'map.shtml?START=START', true);
+					xhr.send(null);
+					var response = xhr.responseText;
+
+				}
+
+				function stopPress(){
+					var xhr = new XMLHttpRequest();
+					xhr.onreadystatechange = function() {
+					    if (xhr.readyState == 10) {
+					    	//alert("hello");
+					    }
+					}
+					xhr.open('GET', 'map.shtml?STOP=STOP', true);
+					xhr.send(null);
+					var response = xhr.responseText;
+				}
+
+				var canvas = document.getElementById('canvas');
+				var ctx = canvas.getContext("2d");
+
+				var cols = canvas.width;
+				var rows = canvas.height;
+				var cells = rows * cols;
+				var size = 20;
+				var gW = cols * size;
+				var gH = rows * size;
+
+				var headerSize = 4 * size;
+
+				var gX = 0,
+				    gY = 0,
+				    pX = 0,
+				    pY = 0,
+				    gScale = 1,
+				    speed = 2;
+
+				var isDown = false;
+
+				ctx.strokeStyle = "#06789b";
+				ctx.lineWidth = 2;
+				ctx.font = "14px sans-serif";
+
+				var grid = new Array(cols/size);
+				for(var i = 0; i < cols/size; i++)
+					grid[i] = new Array(rows/size);
+
+				for(var i = 0; i < cols/size; i++){
+					for(var j = 0; j < rows/size; j++)
+						grid[i][j] = "#FFFFFF";
+				}
+
+/*
+				var i = 0;
+				var x = document.getElementById('x').innerHTML;
+				var y = document.getElementById('y').innerHTML;
+
+				var xArr = x.split(" ");
+				var yArr = y.split(" ");
+
+
+				for(i = 0; i < xArr.length; i++){
+					x = ((cols/size) - parseInt(xArr[i])) - 1;
+					y = ((rows/size) - parseInt(yArr[i])) - 1;
+
+					if(!isNaN(x) && !isNaN(y))
+						grid[x][y] = "#06789b";
+				}
+
+*/
+
+
+				drawGrid(0, 0);
+
+function canvasLogic(xPoints, yPoints, myWidth, myHeight){
+					canvas = document.getElementById('canvas');
+				 	ctx = canvas.getContext("2d");
+				 	canvas.width = parseInt(myWidth);
+				 	canvas.height = parseInt(myHeight);
+
+				 	cols = parseInt(myWidth);
+				 	rows = parseInt(myHeight);
+					cells = rows * cols;
+				 	size = 20;
+				 	gW = cols * size;
+				 	gH = rows * size;
+
+				 	headerSize = 4 * size;
+
+				 	gX = 0;
+				    gY = 0;
+				    pX = 0;
+				    pY = 0;
+				    gScale = 1;
+				    speed = 2;
+
+					isDown = false;
+
+					ctx.strokeStyle = "#06789b";
+					ctx.lineWidth = 2;
+					ctx.font = "14px sans-serif";
+
+					grid = new Array(cols/size);
+					for(var i = 0; i < cols/size; i++)
+						grid[i] = new Array(rows/size);
+
+					for(var i = 0; i < cols/size; i++){
+						for(var j = 0; j < rows/size; j++)
+							grid[i][j] = "#FFFFFF";
+					}
+
+
+					i = 0;
+
+					xArr = xPoints.split(" ");
+					yArr = yPoints.split(" ");
+
+
+					for(i = 0; i < xArr.length; i++){
+						x = ((cols/size) - parseInt(xArr[i])) - 1;
+						y = ((rows/size) - parseInt(yArr[i])) - 1;
+
+						if(!isNaN(x) && !isNaN(y))
+							grid[x][y] = "#06789b";
+					}
+
+
+						drawGrid(0, 0);
+				}
+
+				function drawGrid() {
+				    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				    ctx.save();
+				    ctx.translate(gX, gY);
+				    ctx.scale(gScale, gScale);
+
+				    var imageObj = new Image();
+				    imageObj.src = "rover.jpg";
+				    ctx.drawImage(imageObj, i, j);
+
+				    ctx.beginPath();
+
+				    for (var i = 0; i < cols/size; ++i) {
+				        ctx.fillStyle = "#FFFFFF";
+				        ctx.fillRect(i * size, 0, size, size);
+				        ctx.strokeRect(i * size, 0, size, size);
+
+				        ctx.fillStyle = "#000000";
+				        ctx.save();
+				        ctx.translate(i * size + 16, headerSize - 8);
+				        ctx.rotate(Math.PI * 1.5);
+				        //ctx.fillText("Column " + i, 0, 0);
+				        ctx.restore();
+
+				        for (var j = 0; j < rows/size; ++j) {
+				            var color = grid[Math.floor(i)][Math.floor(j)];
+				            ctx.fillStyle = color;
+				            ctx.fillRect(i * size, j * size, size, size);
+				            ctx.strokeRect(i * size, j * size, size, size);
+				            imageObj.onload = function() {
+				     			//ctx.drawImage(imageObj, i, j, size, size);
+				     		}
+				            
+				        }
+				    }
+
+				    canvas.addEventListener('mousemove', function(evt) {
+			        	var mousePos = getMousePos(canvas, evt);
+				        var x = (cols/size) - (mousePos.x/size);
+				        x = Math.floor(x);
+				        var y = (rows/size) - (mousePos.y/size);
+				        y = Math.floor(y);
+				        var message = 'Mouse position: X: ' + x + ', Y: ' + y;
+				        writeMessage(message);
+			      	}, false);
+
+				    ctx.restore();
+				}
+
+				function getMousePos(canvas, evt) {
+			        var rect = canvas.getBoundingClientRect();
+			        return {
+			          x: evt.clientX - rect.left,
+			          y: evt.clientY - rect.top
+			        };
+		      	}
+
+				function writeMessage(message) {
+			        var canvas1 = document.getElementById('canvasForMessage');
+			        var context1 = canvas1.getContext('2d');
+        			context1.clearRect(0, 0, canvas1.width, canvas1.height);
+			        context1.font = '18pt Calibri';
+			        context1.fillStyle = 'black';
+			        context1.fillText(message, 10, 25);
+			    }
+
+			    function keyPressSendGetRequest(message){
+
+					var xhr = new XMLHttpRequest();
+					xhr.onreadystatechange = function() {
+					    if (xhr.readyState == 4) {
+					    }
+					}
+					xhr.open('GET', 'map.shtml?' + message, true);
+					xhr.send(null);
+					var response = xhr.responseText;
+					//alert(response);
+				}
+
+				function sensorCommandGetRequest(){
+					var xhr = new XMLHttpRequest();
+					var count = 0;
+					xhr.onreadystatechange = function() {
+					    if (xhr.readyState == 4) {
+					    	var el = document.createElement( 'div' );
+					    	el.innerHTML = xhr.responseText;
+					    	var temp = el.getElementsByTagName('sensors');
+					    	var commandTemp = el.getElementsByTagName('commands');
+					    	var distanceTemp = el.getElementsByTagName('dist_');
+					    	var timeTemp = el.getElementsByTagName('time_');
+
+					    	if (temp[0].innerHTML != "" || commandTemp[0].innerHTML != "" && count == 
+0)
+					    	{
+					    		var prev = localStorage.sensorvalues;
+								if(prev != null)
+									localStorage.setItem("sensorvalues", prev + temp
+[0].innerHTML + "<br>" + commandTemp[0].innerHTML + "<br><br>");
+								else
+									localStorage.setItem("sensorvalues",temp
+[0].innerHTML + "<br>" + commandTemp[0].innerHTML + "<br><br>");
+								document.getElementById('sensor_commands').innerHTML = 
+localStorage.sensorvalues;
+					    	}
+
+					    	var strTemp = "";
+
+					    	if (distanceTemp[0].innerHTML != "" ){
+					    		strTemp = "<p>Distance Travelled: " + distanceTemp[0].innerHTML + "</p>";
+					    	}
+
+					    	if (timeTemp[0].innerHTML != "") {
+					    		strTemp = strTemp + " <p>Time Elapsed: " + timeTemp[0].innerHTML + "</p>";
+					    	}
+
+					    	var time_ = document.getElementById('distTime');
+					    	time_.innerHTML = strTemp;
+
+					    }
+
+					    count++;
+					}
+					xhr.open('GET', 'sensorcmd.shtml', false);
+					//xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+					xhr.send(null);
+				}
+
+function pointsGetRequest(){
+					var xhr = new XMLHttpRequest();
+					var count = 0;
+					xhr.onreadystatechange = function() {
+					    if (xhr.readyState == 4) {
+					    	var el = document.createElement( 'div' );
+					    	el.innerHTML = xhr.responseText;
+					    	var xValues_ = el.getElementsByTagName('x');
+					    	var yValues_ = el.getElementsByTagName('y');
+					    	var	width_ = el.getElementsByTagName('width');
+					    	var height_ = el.getElementsByTagName('height');
+
+					    	
+					    	xValues_ = xValues_[0].innerHTML;
+					    	yValues_ = yValues_[0].innerHTML;
+					    	width_ = parseInt(width_[0].innerHTML);
+					    	height_ = parseInt(height_[0].innerHTML);
+
+					    	canvasLogic(xValues_, yValues_, width_, height_);
+
+					    }
+
+					    count++;
+					}
+					xhr.open('GET', 'points.shtml', false);
+					//xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+					xhr.send(null);
+				}
+
+				setInterval(sensorCommandGetRequest, 250);
+setInterval(pointsGetRequest, 3000);
+
+				document.onkeydown = checkKey;
+
+				function checkKey(e) {
+
+				    e = e || window.event;
+
+				    if (e.keyCode == '37') {
+				        keyPressSendGetRequest('TURN=LEFT');
+				    }
+				    else if (e.keyCode == '38') {
+				        keyPressSendGetRequest('TURN=UP');
+				    } 
+				    else if (e.keyCode == '39') {
+				    	keyPressSendGetRequest('TURN=RIGHT');
+				    } 
+				    else if (e.keyCode == '40') {
+				    	keyPressSendGetRequest('TURN=DOWN');
+				    }
+				}
+
+				function $(el){
+                 	return document.getElementById(el);
+            	}
+	            var tzdragg = function(){
+	                return {
+	                    move : function(divid,xpos,ypos){
+	                        var a = $(divid);
+	                        $(divid).style.left = xpos + 'px';
+	                        $(divid).style.top = ypos + 'px';
+	                    },
+	                    startMoving : function(evt){
+	                        evt = evt || window.event;
+	                        var posX = evt.clientX,
+	                            posY = evt.clientY,
+	                            a = $('sensor_commands'),
+	                        divTop = a.style.top,
+	                        divLeft = a.style.left;
+	                        divTop = divTop.replace('px','');
+	                        divLeft = divLeft.replace('px','');
+	                        var diffX = posX - divLeft,
+	                            diffY = posY - divTop;
+	                        document.onmousemove = function(evt){
+	                            evt = evt || window.event;
+	                            var posX = evt.clientX,
+	                                posY = evt.clientY,
+	                                aX = posX - diffX,
+	                                aY = posY - diffY;
+	                            tzdragg.move('sensor_commands',aX,aY);
+	                        }
+	                    },
+	                    stopMoving : function(){
+	                        var a = document.createElement('script');
+	                        document.onmousemove = function(){}
+	                    },
+	                }
+	            }();
+
+		</script>
+	</body>
+</html>

@@ -39,4 +39,4 @@ ObjectFiles/movetask.o: MainFiles/moveTask.c MainFiles/moveTask.h \
  ../NXPDrivers/include/lpc_types.h ../vtCode/vtUtilities.h \
  ../NXPDrivers/include/lpc_types.h C:/Keil/ARM/INC/NXP/LPC17xx/lpc17xx.h \
  ../FreeRTOS/Source/include/projDefs.h MainFiles/I2CTaskMsgTypes.h \
- MainFiles/debugPins.h
+ MainFiles/communicationConstants.h MainFiles/debugPins.h

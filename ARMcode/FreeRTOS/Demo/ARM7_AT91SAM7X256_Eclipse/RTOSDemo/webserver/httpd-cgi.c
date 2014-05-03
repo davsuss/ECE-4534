@@ -211,7 +211,7 @@ static unsigned short
 generate_rtos_stats(void *arg)
 {
 	lRefreshCount++;
-	sprintf( cCountBuf, "<p><br>Refresh count = %ld", lRefreshCount );
+	sprintf( cCountBuf, "<p><br>Refresh count httpd-cgi = %ld", lRefreshCount );
     vTaskList( uip_appdata );
 	strcat( uip_appdata, cCountBuf );
   

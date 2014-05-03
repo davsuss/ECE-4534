@@ -1298,6 +1298,7 @@ unsigned portBASE_TYPE uxTaskGetNumberOfTasks( void )
 			*pcWriteBuffer = ( signed char ) 0x00;
 			strcat( ( char * ) pcWriteBuffer, ( const char * ) "\r\n" );
 
+
 			uxQueue = uxTopUsedPriority + ( unsigned portBASE_TYPE ) 1U;
 
 			do
@@ -1342,6 +1343,32 @@ unsigned portBASE_TYPE uxTaskGetNumberOfTasks( void )
 	}
 
 #endif
+
+/*----------------------------------------------------------*/
+
+#if (configGENERATE_MAP == 1)
+	void vTaskGetMapStats( signed char *pcWriteBuffer )
+	{
+		 	unsigned portBASE_TYPE uxQueue;
+			unsigned long ulTotalRunTime;
+	
+			/* This is a VERY costly function that should be used for debug only.
+			It leaves interrupts disabled for a LONG time. */
+	
+			*pcWriteBuffer = ( signed char ) 0x00;
+			//strcat( ( char * ) pcWriteBuffer, ( const char * ) "\r\n" );
+//			printf("pcWriteBuffer %s", pcWriteBuffer);
+//
+//			char *c;
+//			c = strstr( pcWriteBuffer, "Distance Travelled:" );
+//
+//			if( c )
+//			{
+//				sprintf(pcWriteBuffer, "Distance Travelled: 12");
+//			}
+	}
+#endif
+
 /*----------------------------------------------------------*/
 
 #if ( configGENERATE_RUN_TIME_STATS == 1 )

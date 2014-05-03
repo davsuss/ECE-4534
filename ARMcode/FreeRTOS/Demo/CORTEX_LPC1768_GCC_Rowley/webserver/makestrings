@@ -9,6 +9,8 @@ sub stringify {
   open(FILE, "$name");
   
   while(<FILE>) {
+
+    print "Adding file $name $var $data\n";
     if(/(.+) "(.+)"/) {
       $var = $1;
       $data = $2;
@@ -23,7 +25,7 @@ sub stringify {
       printf(OUTPUTC "/* \"$data\" */\n");
       printf(OUTPUTC "{");
       for($j = 0; $j < length($datan); $j++) {
-	printf(OUTPUTC "%#02x, ", unpack("C", substr($datan, $j, 1)));
+	       printf(OUTPUTC "%#02x, ", unpack("C", substr($datan, $j, 1)));
       }
       printf(OUTPUTC "};\n");
       

@@ -49,17 +49,12 @@ static portTASK_FUNCTION_PROTO( vI2CMonitorTask, pvParameters );
 // End of private definitions
 /* ************************************************ */
 
-#include "debugPins.h"
-bool pinState_sendReq;
-uint32_t pinMask_sendReq = 0x2; // pin 1
-
 /* ************************************************ */
 // Public API Functions
 //
 // Note: This will startup an I2C thread, once for each call to this routine
 int vtI2CInit(vtI2CStruct *devPtr,uint8_t i2cDevNum,unsigned portBASE_TYPE taskPriority,uint32_t i2cSpeed)
 {
-	pinState_sendReq = initPin();
 	PINSEL_CFG_Type PinCfg;
 
 	devPtr->devNum = i2cDevNum;
@@ -232,7 +227,6 @@ static portTASK_FUNCTION( vI2CMonitorTask, pvParameters )
 	uint8_t tmpRxBuf[vtI2CMLen];
 	I2C_M_SETUP_Type transferMCfg;
 	int i;
-	GPIO_SetDir(0, pinMask_sendReq, 1);
 
 	for (;;) {
 		// wait for a message from another task telling us to send/recv over i2c
@@ -251,8 +245,6 @@ static portTASK_FUNCTION( vI2CMonitorTask, pvParameters )
 		transferMCfg.retransmissions_max = 3;
 		transferMCfg.retransmissions_count = 0;	 // this *should* be initialized in the LPC code, but is not for interrupt mode
 		msgBuffer.status = I2C_MasterTransferData(devPtr->devAddr, &transferMCfg, I2C_TRANSFER_INTERRUPT);
-		(pinState_sendReq == True) ? (GPIO_ClearValue(0, pinMask_sendReq)):(GPIO_SetValue(0, pinMask_sendReq));
-		pinState_sendReq = updatePin(pinState_sendReq);
 		// Block until the I2C operation is complete -- we *cannot* overlap operations on the I2C bus...
 		if (xSemaphoreTake(devPtr->binSemaphore,portMAX_DELAY) != pdTRUE) {
 			// something went wrong 

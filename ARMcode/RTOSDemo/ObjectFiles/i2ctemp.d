@@ -35,10 +35,10 @@ ObjectFiles/i2ctemp.o: MainFiles/i2cTemp.c \
  ../FreeRTOS/Source/include/task.h ../FreeRTOS/Source/include/list.h \
  ../FreeRTOS/Source/include/projdefs.h \
  ../FreeRTOS/Source/include/semphr.h ../FreeRTOS/Source/include/queue.h \
- MainFiles/uartTask.h ../NXPDrivers/include/lpc17xx_uart.h \
- ../NXPDrivers/include/lpc_types.h ../vtCode/vtUtilities.h \
- ../NXPDrivers/include/lpc_types.h C:/Keil/ARM/INC/NXP/LPC17xx/lpc17xx.h \
+ ../vtCode/vtUtilities.h ../NXPDrivers/include/lpc_types.h \
+ C:/Keil/ARM/INC/NXP/LPC17xx/lpc17xx.h ../vtCode/vtI2C/vtI2C.h \
+ ../NXPDrivers/include/lpc17xx_i2c.h ../NXPDrivers/include/lpc_types.h \
  ../FreeRTOS/Source/include/projDefs.h MainFiles/LCDtask.h \
  ../FreeRTOS/Source/include/queue.h ../FreeRTOS/Source/include/timers.h \
- MainFiles/i2cTemp.h MainFiles/lcdTask.h MainFiles/I2CTaskMsgTypes.h \
- MainFiles/debugPins.h
+ MainFiles/i2cTemp.h MainFiles/lcdTask.h MainFiles/webservertask.h \
+ MainFiles/I2CTaskMsgTypes.h

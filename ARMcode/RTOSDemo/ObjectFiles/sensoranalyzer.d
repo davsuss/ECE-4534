@@ -40,4 +40,8 @@ ObjectFiles/sensoranalyzer.o: MainFiles/sensorAnalyzer.c \
  C:/Keil/ARM/INC/NXP/LPC17xx/lpc17xx.h ../vtCode/vtI2C/vtI2C.h \
  ../NXPDrivers/include/lpc17xx_i2c.h ../NXPDrivers/include/lpc_types.h \
  ../FreeRTOS/Source/include/projDefs.h MainFiles/moveTask.h \
- MainFiles/I2CTaskMsgTypes.h MainFiles/mapTask.h MainFiles/debugPins.h
+ MainFiles/I2CTaskMsgTypes.h MainFiles/communicationConstants.h \
+ MainFiles/mapTask.h MainFiles/webservertask.h \
+ ../FreeRTOS/Source/include/queue.h MainFiles/roverKinematics.h \
+ MainFiles/RoverMessageTypes.h MainFiles/rovermessageparser.h \
+ MainFiles/debugPins.h

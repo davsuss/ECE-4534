@@ -28,13 +28,22 @@ typedef struct __SensorAStruct {
 	unsigned int unit_distance; // represents the distance the ARM will clear the ROVER
 	vtI2CStruct *i2cDev; // to access the outQ of vtI2C
 	MoveTaskStruct *moveT; // to access the inQ of moveTask
-	mapTStruct *mapT;  // to access the inQ of mapTas									    
+	mapTStruct *mapT;  // to access the inQ of mapTas
+    webServerTaskStruct *webServerData;
 } SensorAStruct;
 
-// maximum number of sensor samples possible (4 - bits)
-#define maxSensorSamples 15
+// maximum number of bytes of sensor samples possible
+#define maxSensorBytes 7
 // maximum bytes expected to be returned by the ARM-PIC upon request
-#define maxReceiveBytesForSpecificNumOfSensorSamples 9 // 1 sensor samples
+#define maxReceiveBytesForSpecificNumOfSensorSamples 9 // 3 sensor samples
+#define numOfSensorToDebounce 3
+#define acceptableTolerance 2
+
+
+enum {GLOBAL_READ, GETTING_IN_3_FEET, AVOID_OBSTACLE_1};
+
+uint8_t current_state = GLOBAL_READ;
+uint8_t	prev_state = GLOBAL_READ;
 
 // Public API
 //
