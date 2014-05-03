@@ -883,14 +883,19 @@ static portTASK_FUNCTION( sensorTask, pvParameters )
 //								printf("rightF = %d, rightI = %d, leftF = %d, leftI = %d\n", rightFeet, rightInches, leftFeet
 //										, leftInches);
 
+								if ( !canFront && !canSideT && !canSideB){
+									return;
+								}
+
+
 								sendWheelDistancesOnly(sensorT->mapT, leftFeet, leftInches, rightFeet, rightInches, 0);
                                 
                                	printf("Front %d\n", frontDistanceInches);
                                 printf("TR %d\n", topRightDistanceInches);
                                 printf("BR %d\n", bottomRightDistanceInches);
                                 
-                                SendWebServerSensorData(webServerData, frontDistanceInches,
-                                                        topRightDistanceInches,bottomRightDistanceInches, 0);
+                                SendWebServerSensorData(webServerData, usableFront,
+                                                        usableSideT,usableSideB, 0);
                                 
                                 
                                 performLogic(buffer , rxLen, moveTPtr, sensorT);
