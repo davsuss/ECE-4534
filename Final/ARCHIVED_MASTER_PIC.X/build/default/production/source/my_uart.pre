@@ -6009,7 +6009,7 @@ if (USART_Status.OVERRUN_ERROR == 1) {
 
 RCSTAbits.CREN = 0;
 RCSTAbits.CREN = 1;
-ToMainLow_sendmsg(0, 30, (void *) 0);
+ToMainHigh_sendmsg(0, 30, (void *) 0);
 
 }
 }

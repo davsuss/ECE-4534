@@ -528,7 +528,11 @@ void i2c_master_int_handler(){
                 SSPCON2bits.RCEN = 1;
             }
             else {
-                ToMainHigh_sendmsg(ic_ptr->buflen, MSGT_I2C_MASTER_RECV_COMPLETE, (void *)(ic_ptr->buffer));
+                if(ic_ptr->slave_addr == 0x4F)
+                {ToMainLow_sendmsg(ic_ptr->buflen, MSGT_MOTOR_BACK, (void *)(ic_ptr->buffer));}
+                else
+                {ToMainLow_sendmsg(ic_ptr->buflen, MSGT_SEND_BACK, (void *)(ic_ptr->buffer));}
+                
                 ic_ptr->status = I2C_IDLE;
                 SSPCON2bits.PEN = 1;
                 SSPCON2bits.ACKDT = 0;

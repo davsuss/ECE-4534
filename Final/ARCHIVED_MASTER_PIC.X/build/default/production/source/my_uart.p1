@@ -42,7 +42,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S245 . . . . . . . . ]
 "4135 /Applications/microchip/xc8/v1.30/include/pic18f45j10.h
 [v _RCSTAbits `VS245 ~T0 @X0 0 e@4011 ]
-"57 source/messages.h
+"64 source/messages.h
+[v _ToMainHigh_sendmsg `(c ~T0 @X0 0 ef3`uc`uc`*v ]
+"57
 [v _ToMainLow_sendmsg `(c ~T0 @X0 0 ef3`uc`uc`*v ]
 [s S262 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S262 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
@@ -4767,9 +4769,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;my_uart.c: 46: RCSTAbits.CREN = 1;
 "46
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;my_uart.c: 47: ToMainLow_sendmsg(0, 30, (void *) 0);
+[; ;my_uart.c: 47: ToMainHigh_sendmsg(0, 30, (void *) 0);
 "47
-[e ( _ToMainLow_sendmsg (3 , , -> -> 0 `i `uc -> -> 30 `i `uc -> -> 0 `i `*v ]
+[e ( _ToMainHigh_sendmsg (3 , , -> -> 0 `i `uc -> -> 30 `i `uc -> -> 0 `i `*v ]
 "49
 }
 [e :U 586 ]

@@ -6013,17 +6013,10 @@ void i2c_slave_int_handler(void);
 # 15 "source/user_interrupts.c"
 int x = 0;
 void timer0_int_handler() {
-unsigned char val = 0x32;
-int length, msgtype;
 
 
 WriteTimer0(0);
-if(x == 0)
-{
-x= 1;
 
-
-}
 
 }
 

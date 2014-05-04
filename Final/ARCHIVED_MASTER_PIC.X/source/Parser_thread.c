@@ -4,6 +4,8 @@
 #include "ArmMessageTypes.h"
 #include "Parser_thread.h"
 #include "my_uart.h"
+unsigned int foot = 0;
+unsigned int inch = 0;
 unsigned int motorStatus;
 int parser_lthread(int msgtype,int length,unsigned char* msgbuf)
 {
@@ -133,10 +135,10 @@ int parser_lthread(int msgtype,int length,unsigned char* msgbuf)
         data[4] = msgbuf[3];
         data[5] = msgbuf[4];
         data[6] = msgbuf[5];
-        data[7] = 0x00;
-        data[8] = 0x00;
-        data[9] = 0x00;
-        data[10] = 0x00;
+        data[7] = foot;
+        data[8] = inch;
+        data[9] = foot;
+        data[10] = inch;
         int x = 0;
         for(x = 0; x < 11;x++)
         {
@@ -144,6 +146,11 @@ int parser_lthread(int msgtype,int length,unsigned char* msgbuf)
         }
         data[11] = checksum & 0x0FF;
         uart_write(12,data);
+    }
+    if(msgtype == MSGT_MOTOR_BACK)
+    {
+        foot = msgbuf[1];
+        inch = msgbuf[2];
     }
 
   

@@ -53,7 +53,7 @@
 #define MSGT_UART_SEND 47
 #define MSGT_PARSE 49
 #define MSGT_SEND_BACK 50
-
+#define MSGT_MOTOR_BACK 51
 #define MSGT_DATA_REQUEST 48
 #endif
 

@@ -6465,7 +6465,11 @@ ic_ptr->status = 0x15;
 SSPCON2bits.RCEN = 1;
 }
 else {
-ToMainHigh_sendmsg(ic_ptr->buflen, 45, (void *)(ic_ptr->buffer));
+if(ic_ptr->slave_addr == 0x4F)
+{ToMainLow_sendmsg(ic_ptr->buflen, 51, (void *)(ic_ptr->buffer));}
+else
+{ToMainLow_sendmsg(ic_ptr->buflen, 50, (void *)(ic_ptr->buffer));}
+
 ic_ptr->status = 0x5;
 SSPCON2bits.PEN = 1;
 SSPCON2bits.ACKDT = 0;

@@ -6173,10 +6173,7 @@ TRISB = 0x0;
 LATB = 0x0;
 
 # 251
-OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110111);
-
-# 260
-OpenTimer1(0b11111111 & 0b11111111 & 0b11111111 & 0b11111101 & 0b11110111 & 0b11111111);
+OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110101);
 
 # 267
 IPR1bits.TMR1IP = 0;
@@ -6210,20 +6207,25 @@ length = ToMainHigh_recvmsg(10, &msgtype, (void *) msgbuffer);
 if (length < 0) {
 
 if (length != -4) {
+asm(" reset");
 
 }
 } else {
 switch (msgtype) {
 case 10:
 {
-timer0_lthread(&t0thread_data, msgtype, length, msgbuffer);
+if(ic.status == 0x5)
+{
+i2c_configure_master(0x4F);
+i2c_master_recv(0x5);
+}
 break;
 };
-case 45:
+case 49:
 {
-ToMainLow_sendmsg(length,50,msgbuffer);
+parser_lthread(msgtype,length,msgbuffer);
 break;
-}
+};
 case 47:
 {
 uart_write(length,msgbuffer);
@@ -6243,30 +6245,21 @@ length = ToMainLow_recvmsg(10, &msgtype, (void *) msgbuffer);
 if (length < 0) {
 
 if (length != -4) {
+asm(" reset");
 
 }
 } else {
 switch (msgtype) {
-case 11:
-{
-timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
-break;
-};
 case 30:
 {
 break;
 };
-case 31:
-{
-
-break;
-};
-case 49:
+case 50:
 {
 parser_lthread(msgtype,length,msgbuffer);
 break;
 };
-case 50:
+case 51:
 {
 parser_lthread(msgtype,length,msgbuffer);
 break;

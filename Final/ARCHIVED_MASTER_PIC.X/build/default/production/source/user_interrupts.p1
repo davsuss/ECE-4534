@@ -4688,50 +4688,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user_interrupts.c: 16: void timer0_int_handler() {
 [e :U _timer0_int_handler ]
 [f ]
-"17
-[v _val `uc ~T0 @X0 1 a ]
-[; ;user_interrupts.c: 17: unsigned char val = 0x32;
-[e = _val -> -> 50 `i `uc ]
-"18
-[v _length `i ~T0 @X0 1 a ]
-[v _msgtype `i ~T0 @X0 1 a ]
-[; ;user_interrupts.c: 18: int length, msgtype;
-[; ;user_interrupts.c: 21: WriteTimer0(0);
-"21
+[; ;user_interrupts.c: 19: WriteTimer0(0);
+"19
 [e ( _WriteTimer0 (1 -> -> 0 `i `ui ]
-[; ;user_interrupts.c: 22: if(x == 0)
+[; ;user_interrupts.c: 22: }
 "22
-[e $ ! == _x -> 0 `i 586  ]
-[; ;user_interrupts.c: 23: {
-"23
-{
-[; ;user_interrupts.c: 24: x= 1;
-"24
-[e = _x -> 1 `i ]
-"27
-}
-[e :U 586 ]
-[; ;user_interrupts.c: 27: }
-[; ;user_interrupts.c: 29: }
-"29
 [e :UE 585 ]
 }
-"34
+"27
 [v _timer1_int_handler `(v ~T0 @X0 1 ef ]
 {
-[; ;user_interrupts.c: 34: void timer1_int_handler() {
+[; ;user_interrupts.c: 27: void timer1_int_handler() {
 [e :U _timer1_int_handler ]
 [f ]
-"35
+"28
 [v _result `ui ~T0 @X0 1 a ]
-[; ;user_interrupts.c: 35: unsigned int result;
-[; ;user_interrupts.c: 37: result = ReadTimer1();
-"37
+[; ;user_interrupts.c: 28: unsigned int result;
+[; ;user_interrupts.c: 30: result = ReadTimer1();
+"30
 [e = _result ( _ReadTimer1 ..  ]
-[; ;user_interrupts.c: 42: WriteTimer1(0);
-"42
+[; ;user_interrupts.c: 35: WriteTimer1(0);
+"35
 [e ( _WriteTimer1 (1 -> -> 0 `i `ui ]
-[; ;user_interrupts.c: 43: }
-"43
-[e :UE 587 ]
+[; ;user_interrupts.c: 36: }
+"36
+[e :UE 586 ]
 }

@@ -4714,299 +4714,311 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;my_uart.h: 26: void uart_write(unsigned char length, unsigned char *msg);
 [; ;my_uart.h: 27: void parseUART();
 "7 source/Parser_thread.c
-[v _motorStatus `ui ~T0 @X0 1 e ]
-[; ;Parser_thread.c: 7: unsigned int motorStatus;
+[v _foot `ui ~T0 @X0 1 e ]
+[i _foot
+-> -> 0 `i `ui
+]
+[; ;Parser_thread.c: 7: unsigned int foot = 0;
 "8
-[v _parser_lthread `(i ~T0 @X0 1 ef3`i`i`*uc ]
+[v _inch `ui ~T0 @X0 1 e ]
+[i _inch
+-> -> 0 `i `ui
+]
+[; ;Parser_thread.c: 8: unsigned int inch = 0;
 "9
+[v _motorStatus `ui ~T0 @X0 1 e ]
+[; ;Parser_thread.c: 9: unsigned int motorStatus;
+"10
+[v _parser_lthread `(i ~T0 @X0 1 ef3`i`i`*uc ]
+"11
 {
-[; ;Parser_thread.c: 8: int parser_lthread(int msgtype,int length,unsigned char* msgbuf)
-[; ;Parser_thread.c: 9: {
+[; ;Parser_thread.c: 10: int parser_lthread(int msgtype,int length,unsigned char* msgbuf)
+[; ;Parser_thread.c: 11: {
 [e :U _parser_lthread ]
-"8
+"10
 [v _msgtype `i ~T0 @X0 1 r1 ]
 [v _length `i ~T0 @X0 1 r2 ]
 [v _msgbuf `*uc ~T0 @X0 1 r3 ]
-"9
+"11
 [f ]
-[; ;Parser_thread.c: 10: if(msgtype == 49) {
-"10
+[; ;Parser_thread.c: 12: if(msgtype == 49) {
+"12
 [e $ ! == _msgtype -> 49 `i 586  ]
 {
-[; ;Parser_thread.c: 12: if ( !validateMessage(msgbuf, (unsigned char) length) )
-"12
+[; ;Parser_thread.c: 14: if ( !validateMessage(msgbuf, (unsigned char) length) )
+"14
 [e $ ! ! != -> ( _validateMessage (2 , _msgbuf -> _length `uc `i -> -> -> 0 `i `uc `i 587  ]
-[; ;Parser_thread.c: 13: return;
-"13
+[; ;Parser_thread.c: 15: return;
+"15
 [e $UE 585  ]
 [e :U 587 ]
-[; ;Parser_thread.c: 15: switch (getMessageId(msgbuf, (unsigned char) length)) {
-"15
+[; ;Parser_thread.c: 17: switch (getMessageId(msgbuf, (unsigned char) length)) {
+"17
 [e $U 589  ]
 {
-[; ;Parser_thread.c: 17: case 0x0:
-"17
-[e :U 590 ]
-[; ;Parser_thread.c: 18: {
-"18
-{
-[; ;Parser_thread.c: 19: i2c_configure_master(0x4D);
+[; ;Parser_thread.c: 19: case 0x0:
 "19
-[e ( _i2c_configure_master (1 -> -> 77 `i `uc ]
-[; ;Parser_thread.c: 20: i2c_master_recv(0x07);
+[e :U 590 ]
+[; ;Parser_thread.c: 20: {
 "20
-[e ( _i2c_master_recv (1 -> -> 7 `i `uc ]
-[; ;Parser_thread.c: 21: break;
+{
+[; ;Parser_thread.c: 21: i2c_configure_master(0x4D);
 "21
-[e $U 588  ]
+[e ( _i2c_configure_master (1 -> -> 77 `i `uc ]
+[; ;Parser_thread.c: 22: i2c_master_recv(0x07);
 "22
-}
-[; ;Parser_thread.c: 22: };
-[; ;Parser_thread.c: 24: case 0x2:
+[e ( _i2c_master_recv (1 -> -> 7 `i `uc ]
+[; ;Parser_thread.c: 23: break;
+"23
+[e $U 588  ]
 "24
-[e :U 591 ]
-[; ;Parser_thread.c: 25: {
-"25
-{
+}
+[; ;Parser_thread.c: 24: };
+[; ;Parser_thread.c: 26: case 0x2:
 "26
-[v _data `uc ~T0 @X0 -> 5 `i a ]
+[e :U 591 ]
+[; ;Parser_thread.c: 27: {
 "27
-[v _command `uc ~T0 @X0 1 a ]
-"28
-[v _ticks `ui ~T0 @X0 1 a ]
-"29
-[v _Feet `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 26: unsigned char data[5];
-[; ;Parser_thread.c: 27: unsigned char command;
-[; ;Parser_thread.c: 28: unsigned int ticks;
-[; ;Parser_thread.c: 29: unsigned char Feet = 0;
-[e = _Feet -> -> 0 `i `uc ]
-"30
-[v _Inches `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 30: unsigned char Inches = 0;
-[e = _Inches -> -> 0 `i `uc ]
-"31
-[v _degrees `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 31: unsigned char degrees = 0;
-[e = _degrees -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 33: switch(msgbuf[1] & 0x0F)
-"33
-[e $U 593  ]
-[; ;Parser_thread.c: 34: {
-"34
 {
-[; ;Parser_thread.c: 35: case(0x01):
+"28
+[v _data `uc ~T0 @X0 -> 5 `i a ]
+"29
+[v _command `uc ~T0 @X0 1 a ]
+"30
+[v _ticks `ui ~T0 @X0 1 a ]
+"31
+[v _Feet `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 28: unsigned char data[5];
+[; ;Parser_thread.c: 29: unsigned char command;
+[; ;Parser_thread.c: 30: unsigned int ticks;
+[; ;Parser_thread.c: 31: unsigned char Feet = 0;
+[e = _Feet -> -> 0 `i `uc ]
+"32
+[v _Inches `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 32: unsigned char Inches = 0;
+[e = _Inches -> -> 0 `i `uc ]
+"33
+[v _degrees `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 33: unsigned char degrees = 0;
+[e = _degrees -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 35: switch(msgbuf[1] & 0x0F)
 "35
-[e :U 594 ]
+[e $U 593  ]
 [; ;Parser_thread.c: 36: {
 "36
 {
-[; ;Parser_thread.c: 38: command = 0x01;
+[; ;Parser_thread.c: 37: case(0x01):
+"37
+[e :U 594 ]
+[; ;Parser_thread.c: 38: {
 "38
-[e = _command -> -> 1 `i `uc ]
-[; ;Parser_thread.c: 39: degrees = msgbuf[2];
-"39
-[e = _degrees *U + _msgbuf * -> -> 2 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 40: break;
+{
+[; ;Parser_thread.c: 40: command = 0x01;
 "40
-[e $U 592  ]
+[e = _command -> -> 1 `i `uc ]
+[; ;Parser_thread.c: 41: degrees = msgbuf[2];
 "41
-}
-[; ;Parser_thread.c: 41: }
-[; ;Parser_thread.c: 42: case(0x02):
-"42
-[e :U 595 ]
-[; ;Parser_thread.c: 43: {
-"43
-{
-[; ;Parser_thread.c: 45: command = 0x02;
-"45
-[e = _command -> -> 2 `i `uc ]
-[; ;Parser_thread.c: 46: degrees = msgbuf[2];
-"46
 [e = _degrees *U + _msgbuf * -> -> 2 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 47: break;
-"47
+[; ;Parser_thread.c: 42: break;
+"42
 [e $U 592  ]
-"48
+"43
 }
-[; ;Parser_thread.c: 48: }
-[; ;Parser_thread.c: 49: case(0x00):
-"49
-[e :U 596 ]
-[; ;Parser_thread.c: 50: {
-"50
+[; ;Parser_thread.c: 43: }
+[; ;Parser_thread.c: 44: case(0x02):
+"44
+[e :U 595 ]
+[; ;Parser_thread.c: 45: {
+"45
 {
-[; ;Parser_thread.c: 52: command = 0x03;
+[; ;Parser_thread.c: 47: command = 0x02;
+"47
+[e = _command -> -> 2 `i `uc ]
+[; ;Parser_thread.c: 48: degrees = msgbuf[2];
+"48
+[e = _degrees *U + _msgbuf * -> -> 2 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 49: break;
+"49
+[e $U 592  ]
+"50
+}
+[; ;Parser_thread.c: 50: }
+[; ;Parser_thread.c: 51: case(0x00):
+"51
+[e :U 596 ]
+[; ;Parser_thread.c: 52: {
 "52
-[e = _command -> -> 3 `i `uc ]
-[; ;Parser_thread.c: 53: Feet = msgbuf[3];
-"53
-[e = _Feet *U + _msgbuf * -> -> 3 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 54: Inches = msgbuf[4];
+{
+[; ;Parser_thread.c: 54: command = 0x03;
 "54
-[e = _Inches *U + _msgbuf * -> -> 4 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 56: break;
+[e = _command -> -> 3 `i `uc ]
+[; ;Parser_thread.c: 55: Feet = msgbuf[3];
+"55
+[e = _Feet *U + _msgbuf * -> -> 3 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 56: Inches = msgbuf[4];
 "56
-[e $U 592  ]
-"57
-}
+[e = _Inches *U + _msgbuf * -> -> 4 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 58: break;
 "58
-}
-[; ;Parser_thread.c: 57: }
-[; ;Parser_thread.c: 58: }
 [e $U 592  ]
-"33
+"59
+}
+"60
+}
+[; ;Parser_thread.c: 59: }
+[; ;Parser_thread.c: 60: }
+[e $U 592  ]
+"35
 [e :U 593 ]
 [e [\ & -> *U + _msgbuf * -> -> 1 `i `x -> -> # *U _msgbuf `i `x `i -> 15 `i , $ -> 1 `i 594
  , $ -> 2 `i 595
  , $ -> 0 `i 596
  592 ]
-"58
-[e :U 592 ]
-[; ;Parser_thread.c: 60: data[0] = command;
 "60
-[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux _command ]
-[; ;Parser_thread.c: 61: data[1] = degrees;
-"61
-[e = *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux _degrees ]
-[; ;Parser_thread.c: 62: data[2] = Feet;
+[e :U 592 ]
+[; ;Parser_thread.c: 62: data[0] = command;
 "62
-[e = *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux _Feet ]
-[; ;Parser_thread.c: 63: data[3] = Inches;
+[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux _command ]
+[; ;Parser_thread.c: 63: data[1] = degrees;
 "63
-[e = *U + &U _data * -> -> -> 3 `i `ui `ux -> -> # *U &U _data `ui `ux _Inches ]
+[e = *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux _degrees ]
+[; ;Parser_thread.c: 64: data[2] = Feet;
+"64
+[e = *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux _Feet ]
+[; ;Parser_thread.c: 65: data[3] = Inches;
 "65
-[v _reply `uc ~T0 @X0 -> 6 `i a ]
-[; ;Parser_thread.c: 65: unsigned char reply[6];
-[; ;Parser_thread.c: 66: reply[0] = 0x30;
-"66
-[e = *U + &U _reply * -> -> -> 0 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
-[; ;Parser_thread.c: 67: reply[1] = 0x00;
+[e = *U + &U _data * -> -> -> 3 `i `ui `ux -> -> # *U &U _data `ui `ux _Inches ]
 "67
-[e = *U + &U _reply * -> -> -> 1 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 68: reply[2] = 0x00;
+[v _reply `uc ~T0 @X0 -> 6 `i a ]
+[; ;Parser_thread.c: 67: unsigned char reply[6];
+[; ;Parser_thread.c: 68: reply[0] = 0x30;
 "68
-[e = *U + &U _reply * -> -> -> 2 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 69: reply[3] = 0x00;
+[e = *U + &U _reply * -> -> -> 0 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
+[; ;Parser_thread.c: 69: reply[1] = 0x00;
 "69
-[e = *U + &U _reply * -> -> -> 3 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 70: reply[4] = 0x00;
+[e = *U + &U _reply * -> -> -> 1 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 70: reply[2] = 0x00;
 "70
-[e = *U + &U _reply * -> -> -> 4 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 71: reply[5] = 0x30;
+[e = *U + &U _reply * -> -> -> 2 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 71: reply[3] = 0x00;
 "71
-[e = *U + &U _reply * -> -> -> 5 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
-[; ;Parser_thread.c: 73: uart_write(6,reply);
+[e = *U + &U _reply * -> -> -> 3 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 72: reply[4] = 0x00;
+"72
+[e = *U + &U _reply * -> -> -> 4 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 73: reply[5] = 0x30;
 "73
-[e ( _uart_write (2 , -> -> 6 `i `uc &U _reply ]
-[; ;Parser_thread.c: 75: i2c_configure_master(0x4F);
+[e = *U + &U _reply * -> -> -> 5 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
+[; ;Parser_thread.c: 75: uart_write(6,reply);
 "75
+[e ( _uart_write (2 , -> -> 6 `i `uc &U _reply ]
+[; ;Parser_thread.c: 77: i2c_configure_master(0x4F);
+"77
 [e ( _i2c_configure_master (1 -> -> 79 `i `uc ]
-[; ;Parser_thread.c: 76: i2c_master_send(5,data);
-"76
-[e ( _i2c_master_send (2 , -> -> 5 `i `uc &U _data ]
-[; ;Parser_thread.c: 78: break;
+[; ;Parser_thread.c: 78: i2c_master_send(5,data);
 "78
+[e ( _i2c_master_send (2 , -> -> 5 `i `uc &U _data ]
+[; ;Parser_thread.c: 80: break;
+"80
 [e $U 588  ]
-"79
-}
-[; ;Parser_thread.c: 79: };
-[; ;Parser_thread.c: 81: case 0x4:
 "81
-[e :U 597 ]
-[; ;Parser_thread.c: 82: {
-"82
-{
+}
+[; ;Parser_thread.c: 81: };
+[; ;Parser_thread.c: 83: case 0x4:
 "83
-[v _reply `uc ~T0 @X0 -> 6 `i a ]
-[; ;Parser_thread.c: 83: unsigned char reply[6];
-[; ;Parser_thread.c: 84: reply[0] = 0x30;
+[e :U 597 ]
+[; ;Parser_thread.c: 84: {
 "84
-[e = *U + &U _reply * -> -> -> 0 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
-[; ;Parser_thread.c: 85: reply[1] = 0x00;
+{
 "85
-[e = *U + &U _reply * -> -> -> 1 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 86: reply[2] = 0x00;
-"86
-[e = *U + &U _reply * -> -> -> 2 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 87: reply[3] = 0x00;
-"87
-[e = *U + &U _reply * -> -> -> 3 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 88: reply[4] = 0x00;
-"88
-[e = *U + &U _reply * -> -> -> 4 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 89: reply[5] = 0x30;
-"89
-[e = *U + &U _reply * -> -> -> 5 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
-[; ;Parser_thread.c: 91: uart_write(6,reply);
-"91
-[e ( _uart_write (2 , -> -> 6 `i `uc &U _reply ]
-[; ;Parser_thread.c: 92: break;
-"92
-[e $U 588  ]
-"93
-}
-[; ;Parser_thread.c: 93: };
-[; ;Parser_thread.c: 95: case 0x3:
-"95
-[e :U 598 ]
-[; ;Parser_thread.c: 96: {
-"96
-{
-"97
 [v _reply `uc ~T0 @X0 -> 6 `i a ]
-[; ;Parser_thread.c: 97: unsigned char reply[6];
-[; ;Parser_thread.c: 98: reply[0] = 0x30;
-"98
+[; ;Parser_thread.c: 85: unsigned char reply[6];
+[; ;Parser_thread.c: 86: reply[0] = 0x30;
+"86
 [e = *U + &U _reply * -> -> -> 0 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
-[; ;Parser_thread.c: 99: reply[1] = 0x00;
-"99
+[; ;Parser_thread.c: 87: reply[1] = 0x00;
+"87
 [e = *U + &U _reply * -> -> -> 1 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 100: reply[2] = 0x00;
-"100
+[; ;Parser_thread.c: 88: reply[2] = 0x00;
+"88
 [e = *U + &U _reply * -> -> -> 2 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 101: reply[3] = 0x00;
-"101
+[; ;Parser_thread.c: 89: reply[3] = 0x00;
+"89
 [e = *U + &U _reply * -> -> -> 3 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 102: reply[4] = 0x00;
-"102
+[; ;Parser_thread.c: 90: reply[4] = 0x00;
+"90
 [e = *U + &U _reply * -> -> -> 4 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 103: reply[5] = 0x30;
-"103
+[; ;Parser_thread.c: 91: reply[5] = 0x30;
+"91
 [e = *U + &U _reply * -> -> -> 5 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
-[; ;Parser_thread.c: 105: uart_write(6,reply);
-"105
+[; ;Parser_thread.c: 93: uart_write(6,reply);
+"93
 [e ( _uart_write (2 , -> -> 6 `i `uc &U _reply ]
-[; ;Parser_thread.c: 106: break;
-"106
+[; ;Parser_thread.c: 94: break;
+"94
 [e $U 588  ]
-"107
+"95
 }
-[; ;Parser_thread.c: 107: };
-[; ;Parser_thread.c: 109: case 0xFF:
-"109
-[e :U 599 ]
-[; ;Parser_thread.c: 110: {
-"110
+[; ;Parser_thread.c: 95: };
+[; ;Parser_thread.c: 97: case 0x3:
+"97
+[e :U 598 ]
+[; ;Parser_thread.c: 98: {
+"98
 {
-[; ;Parser_thread.c: 111: break;
+"99
+[v _reply `uc ~T0 @X0 -> 6 `i a ]
+[; ;Parser_thread.c: 99: unsigned char reply[6];
+[; ;Parser_thread.c: 100: reply[0] = 0x30;
+"100
+[e = *U + &U _reply * -> -> -> 0 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
+[; ;Parser_thread.c: 101: reply[1] = 0x00;
+"101
+[e = *U + &U _reply * -> -> -> 1 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 102: reply[2] = 0x00;
+"102
+[e = *U + &U _reply * -> -> -> 2 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 103: reply[3] = 0x00;
+"103
+[e = *U + &U _reply * -> -> -> 3 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 104: reply[4] = 0x00;
+"104
+[e = *U + &U _reply * -> -> -> 4 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 105: reply[5] = 0x30;
+"105
+[e = *U + &U _reply * -> -> -> 5 `i `ui `ux -> -> # *U &U _reply `ui `ux -> -> 48 `i `uc ]
+[; ;Parser_thread.c: 107: uart_write(6,reply);
+"107
+[e ( _uart_write (2 , -> -> 6 `i `uc &U _reply ]
+[; ;Parser_thread.c: 108: break;
+"108
+[e $U 588  ]
+"109
+}
+[; ;Parser_thread.c: 109: };
+[; ;Parser_thread.c: 111: case 0xFF:
 "111
-[e $U 588  ]
+[e :U 599 ]
+[; ;Parser_thread.c: 112: {
 "112
-}
-[; ;Parser_thread.c: 112: };
-[; ;Parser_thread.c: 114: default:
+{
+[; ;Parser_thread.c: 113: break;
+"113
+[e $U 588  ]
 "114
-[e :U 600 ]
-[; ;Parser_thread.c: 115: break;
-"115
-[e $U 588  ]
-"116
 }
-[; ;Parser_thread.c: 116: }
+[; ;Parser_thread.c: 114: };
+[; ;Parser_thread.c: 116: default:
+"116
+[e :U 600 ]
+[; ;Parser_thread.c: 117: break;
+"117
 [e $U 588  ]
-"15
+"118
+}
+[; ;Parser_thread.c: 118: }
+[e $U 588  ]
+"17
 [e :U 589 ]
 [e [\ ( _getMessageId (2 , _msgbuf -> _length `uc , $ -> -> 0 `i `uc 590
  , $ -> -> 2 `i `uc 591
@@ -5014,234 +5026,250 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 3 `i `uc 598
  , $ -> -> 255 `i `uc 599
  600 ]
-"116
-[e :U 588 ]
 "118
+[e :U 588 ]
+"120
 }
 [e :U 586 ]
-[; ;Parser_thread.c: 118: }
-[; ;Parser_thread.c: 119: if(msgtype == 50)
-"119
-[e $ ! == _msgtype -> 50 `i 601  ]
-[; ;Parser_thread.c: 120: {
-"120
-{
+[; ;Parser_thread.c: 120: }
+[; ;Parser_thread.c: 121: if(msgtype == 50)
 "121
-[v _checksum `ui ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 121: unsigned int checksum = 0;
-[e = _checksum -> -> 0 `i `ui ]
+[e $ ! == _msgtype -> 50 `i 601  ]
+[; ;Parser_thread.c: 122: {
 "122
-[v _data `uc ~T0 @X0 -> 12 `i a ]
-"123
-[v _status `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 122: unsigned char data[12];
-[; ;Parser_thread.c: 123: unsigned char status = 0;
-[e = _status -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 125: if(msgbuf[6] == 0x01)
-"125
-[e $ ! == -> *U + _msgbuf * -> -> 6 `i `x -> -> # *U _msgbuf `i `x `i -> 1 `i 602  ]
-[; ;Parser_thread.c: 126: {
-"126
 {
-[; ;Parser_thread.c: 127: status = 0x20;
+"123
+[v _checksum `ui ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 123: unsigned int checksum = 0;
+[e = _checksum -> -> 0 `i `ui ]
+"124
+[v _data `uc ~T0 @X0 -> 12 `i a ]
+"125
+[v _status `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 124: unsigned char data[12];
+[; ;Parser_thread.c: 125: unsigned char status = 0;
+[e = _status -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 127: if(msgbuf[6] == 0x01)
 "127
-[e = _status -> -> 32 `i `uc ]
+[e $ ! == -> *U + _msgbuf * -> -> 6 `i `x -> -> # *U _msgbuf `i `x `i -> 1 `i 602  ]
+[; ;Parser_thread.c: 128: {
 "128
+{
+[; ;Parser_thread.c: 129: status = 0x20;
+"129
+[e = _status -> -> 32 `i `uc ]
+"130
 }
 [e :U 602 ]
-[; ;Parser_thread.c: 128: }
-[; ;Parser_thread.c: 129: data[0] = status | 0x06;
-"129
-[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux -> | -> _status `i -> 6 `i `uc ]
-[; ;Parser_thread.c: 130: data[1] = msgbuf[0];
-"130
-[e = *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 0 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 131: data[2] = msgbuf[1];
+[; ;Parser_thread.c: 130: }
+[; ;Parser_thread.c: 131: data[0] = status | 0x06;
 "131
-[e = *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 1 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 132: data[3] = msgbuf[2];
+[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux -> | -> _status `i -> 6 `i `uc ]
+[; ;Parser_thread.c: 132: data[1] = msgbuf[0];
 "132
-[e = *U + &U _data * -> -> -> 3 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 2 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 133: data[4] = msgbuf[3];
+[e = *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 0 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 133: data[2] = msgbuf[1];
 "133
-[e = *U + &U _data * -> -> -> 4 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 3 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 134: data[5] = msgbuf[4];
+[e = *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 1 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 134: data[3] = msgbuf[2];
 "134
-[e = *U + &U _data * -> -> -> 5 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 4 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 135: data[6] = msgbuf[5];
+[e = *U + &U _data * -> -> -> 3 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 2 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 135: data[4] = msgbuf[3];
 "135
-[e = *U + &U _data * -> -> -> 6 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 5 `i `x -> -> # *U _msgbuf `i `x ]
-[; ;Parser_thread.c: 136: data[7] = 0x00;
+[e = *U + &U _data * -> -> -> 4 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 3 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 136: data[5] = msgbuf[4];
 "136
-[e = *U + &U _data * -> -> -> 7 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 137: data[8] = 0x00;
+[e = *U + &U _data * -> -> -> 5 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 4 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 137: data[6] = msgbuf[5];
 "137
-[e = *U + &U _data * -> -> -> 8 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 138: data[9] = 0x00;
+[e = *U + &U _data * -> -> -> 6 `i `ui `ux -> -> # *U &U _data `ui `ux *U + _msgbuf * -> -> 5 `i `x -> -> # *U _msgbuf `i `x ]
+[; ;Parser_thread.c: 138: data[7] = foot;
 "138
-[e = *U + &U _data * -> -> -> 9 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 139: data[10] = 0x00;
+[e = *U + &U _data * -> -> -> 7 `i `ui `ux -> -> # *U &U _data `ui `ux -> _foot `uc ]
+[; ;Parser_thread.c: 139: data[8] = inch;
 "139
-[e = *U + &U _data * -> -> -> 10 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 0 `i `uc ]
+[e = *U + &U _data * -> -> -> 8 `i `ui `ux -> -> # *U &U _data `ui `ux -> _inch `uc ]
+[; ;Parser_thread.c: 140: data[9] = foot;
 "140
-[v _x `i ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 140: int x = 0;
-[e = _x -> 0 `i ]
-[; ;Parser_thread.c: 141: for(x = 0; x < 11;x++)
+[e = *U + &U _data * -> -> -> 9 `i `ui `ux -> -> # *U &U _data `ui `ux -> _foot `uc ]
+[; ;Parser_thread.c: 141: data[10] = inch;
 "141
+[e = *U + &U _data * -> -> -> 10 `i `ui `ux -> -> # *U &U _data `ui `ux -> _inch `uc ]
+"142
+[v _x `i ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 142: int x = 0;
+[e = _x -> 0 `i ]
+[; ;Parser_thread.c: 143: for(x = 0; x < 11;x++)
+"143
 {
 [e = _x -> 0 `i ]
 [e $ < _x -> 11 `i 603  ]
 [e $U 604  ]
-"142
-[e :U 603 ]
-[; ;Parser_thread.c: 142: {
-{
-[; ;Parser_thread.c: 143: checksum += data[x];
-"143
-[e =+ _checksum -> *U + &U _data * -> -> _x `ui `ux -> -> # *U &U _data `ui `ux `ui ]
 "144
+[e :U 603 ]
+[; ;Parser_thread.c: 144: {
+{
+[; ;Parser_thread.c: 145: checksum += data[x];
+"145
+[e =+ _checksum -> *U + &U _data * -> -> _x `ui `ux -> -> # *U &U _data `ui `ux `ui ]
+"146
 }
-"141
+"143
 [e ++ _x -> 1 `i ]
 [e $ < _x -> 11 `i 603  ]
 [e :U 604 ]
-"144
-}
-[; ;Parser_thread.c: 144: }
-[; ;Parser_thread.c: 145: data[11] = checksum & 0x0FF;
-"145
-[e = *U + &U _data * -> -> -> 11 `i `ui `ux -> -> # *U &U _data `ui `ux -> & _checksum -> -> 255 `i `ui `uc ]
-[; ;Parser_thread.c: 146: uart_write(12,data);
 "146
-[e ( _uart_write (2 , -> -> 12 `i `uc &U _data ]
+}
+[; ;Parser_thread.c: 146: }
+[; ;Parser_thread.c: 147: data[11] = checksum & 0x0FF;
 "147
+[e = *U + &U _data * -> -> -> 11 `i `ui `ux -> -> # *U &U _data `ui `ux -> & _checksum -> -> 255 `i `ui `uc ]
+[; ;Parser_thread.c: 148: uart_write(12,data);
+"148
+[e ( _uart_write (2 , -> -> 12 `i `uc &U _data ]
+"149
 }
 [e :U 601 ]
-[; ;Parser_thread.c: 147: }
-[; ;Parser_thread.c: 151: }
+[; ;Parser_thread.c: 149: }
+[; ;Parser_thread.c: 150: if(msgtype == 51)
+"150
+[e $ ! == _msgtype -> 51 `i 606  ]
+[; ;Parser_thread.c: 151: {
 "151
+{
+[; ;Parser_thread.c: 152: foot = msgbuf[1];
+"152
+[e = _foot -> *U + _msgbuf * -> -> 1 `i `x -> -> # *U _msgbuf `i `x `ui ]
+[; ;Parser_thread.c: 153: inch = msgbuf[2];
+"153
+[e = _inch -> *U + _msgbuf * -> -> 2 `i `x -> -> # *U _msgbuf `i `x `ui ]
+"154
+}
+[e :U 606 ]
+[; ;Parser_thread.c: 154: }
+[; ;Parser_thread.c: 158: }
+"158
 [e :UE 585 ]
 }
-"166
-[v _validateMessage `(uc ~T0 @X0 1 ef2`*uc`uc ]
-"167
-{
-[; ;Parser_thread.c: 166: unsigned char validateMessage(unsigned char buffer [], unsigned char length)
-[; ;Parser_thread.c: 167: {
-[e :U _validateMessage ]
-"166
-[v _buffer `*uc ~T0 @X0 1 r1 ]
-[v _length `uc ~T0 @X0 1 r2 ]
-"167
-[f ]
-[; ;Parser_thread.c: 171: if (length < 2) {
-"171
-[e $ ! < -> _length `i -> 2 `i 607  ]
-{
-[; ;Parser_thread.c: 172: return 0;
-"172
-[e ) -> -> 0 `i `uc ]
-[e $UE 606  ]
 "173
-}
-[e :U 607 ]
-"175
-[v _len `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 173: }
-[; ;Parser_thread.c: 175: unsigned char len = buffer[0] & 0xF;
-[e = _len -> & -> *U + _buffer * -> -> 0 `i `x -> -> # *U _buffer `i `x `i -> 15 `i `uc ]
-"176
-[v _buf `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 176: unsigned char buf = buffer[5];
-[e = _buf *U + _buffer * -> -> 5 `i `x -> -> # *U _buffer `i `x ]
-"177
-[v _buf2 `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 177: unsigned char buf2 = buffer[4];
-[e = _buf2 *U + _buffer * -> -> 4 `i `x -> -> # *U _buffer `i `x ]
-"178
-[v _buf3 `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 178: unsigned char buf3 = buffer[3];
-[e = _buf3 *U + _buffer * -> -> 3 `i `x -> -> # *U _buffer `i `x ]
-[; ;Parser_thread.c: 181: len = len;
-"181
-[e = _len _len ]
-[; ;Parser_thread.c: 184: len = 1 + len + 1;
-"184
-[e = _len -> + + -> 1 `i -> _len `i -> 1 `i `uc ]
-"185
-[v _i `i ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 185: int i = 0;
-[e = _i -> 0 `i ]
-"186
-[v _checksum `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 186: unsigned char checksum= buffer[len - 1];
-[e = _checksum *U + _buffer * -> - -> _len `i -> 1 `i `x -> -> # *U _buffer `i `x ]
-"187
-[v _rollingsum `uc ~T0 @X0 1 a ]
-[; ;Parser_thread.c: 187: unsigned char rollingsum = 0x00;
-[e = _rollingsum -> -> 0 `i `uc ]
-[; ;Parser_thread.c: 189: for(i = 0; i < len - 1; i++)
-"189
+[v _validateMessage `(uc ~T0 @X0 1 ef2`*uc`uc ]
+"174
 {
-[e = _i -> 0 `i ]
-[e $U 611  ]
-"190
-[e :U 608 ]
-[; ;Parser_thread.c: 190: {
-{
-[; ;Parser_thread.c: 191: rollingsum += buffer[i];
-"191
-[e =+ _rollingsum *U + _buffer * -> _i `x -> -> # *U _buffer `i `x ]
-"192
-}
-"189
-[e ++ _i -> 1 `i ]
-[e :U 611 ]
-[e $ < _i - -> _len `i -> 1 `i 608  ]
-[e :U 609 ]
-"192
-}
-[; ;Parser_thread.c: 192: }
-[; ;Parser_thread.c: 194: return ( (rollingsum & 0xFF) == checksum ) ? 1 : 0;
-"194
-[e ) -> ? == & -> _rollingsum `i -> 255 `i -> _checksum `i : -> 1 `i -> 0 `i `uc ]
-[e $UE 606  ]
-[; ;Parser_thread.c: 195: }
-"195
-[e :UE 606 ]
-}
-"208
-[v _getMessageId `(uc ~T0 @X0 1 ef2`*uc`uc ]
-"209
-{
-[; ;Parser_thread.c: 208: unsigned char getMessageId(unsigned char buffer [], unsigned char length)
-[; ;Parser_thread.c: 209: {
-[e :U _getMessageId ]
-"208
+[; ;Parser_thread.c: 173: unsigned char validateMessage(unsigned char buffer [], unsigned char length)
+[; ;Parser_thread.c: 174: {
+[e :U _validateMessage ]
+"173
 [v _buffer `*uc ~T0 @X0 1 r1 ]
 [v _length `uc ~T0 @X0 1 r2 ]
-"209
+"174
 [f ]
-[; ;Parser_thread.c: 210: if (length > 0) {
-"210
-[e $ ! > -> _length `i -> 0 `i 613  ]
+[; ;Parser_thread.c: 178: if (length < 2) {
+"178
+[e $ ! < -> _length `i -> 2 `i 608  ]
 {
-[; ;Parser_thread.c: 211: return (buffer[0] & 0xF0) >> 4;
-"211
-[e ) -> >> & -> *U + _buffer * -> -> 0 `i `x -> -> # *U _buffer `i `x `i -> 240 `i -> 4 `i `uc ]
-[e $UE 612  ]
-"212
+[; ;Parser_thread.c: 179: return 0;
+"179
+[e ) -> -> 0 `i `uc ]
+[e $UE 607  ]
+"180
 }
-[; ;Parser_thread.c: 212: }
-[e $U 614  ]
-"214
-[e :U 613 ]
-[; ;Parser_thread.c: 214: else return 0xFF;
-[e ) -> -> 255 `i `uc ]
-[e $UE 612  ]
-[e :U 614 ]
-[; ;Parser_thread.c: 215: }
+[e :U 608 ]
+"182
+[v _len `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 180: }
+[; ;Parser_thread.c: 182: unsigned char len = buffer[0] & 0xF;
+[e = _len -> & -> *U + _buffer * -> -> 0 `i `x -> -> # *U _buffer `i `x `i -> 15 `i `uc ]
+"183
+[v _buf `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 183: unsigned char buf = buffer[5];
+[e = _buf *U + _buffer * -> -> 5 `i `x -> -> # *U _buffer `i `x ]
+"184
+[v _buf2 `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 184: unsigned char buf2 = buffer[4];
+[e = _buf2 *U + _buffer * -> -> 4 `i `x -> -> # *U _buffer `i `x ]
+"185
+[v _buf3 `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 185: unsigned char buf3 = buffer[3];
+[e = _buf3 *U + _buffer * -> -> 3 `i `x -> -> # *U _buffer `i `x ]
+[; ;Parser_thread.c: 188: len = len;
+"188
+[e = _len _len ]
+[; ;Parser_thread.c: 191: len = 1 + len + 1;
+"191
+[e = _len -> + + -> 1 `i -> _len `i -> 1 `i `uc ]
+"192
+[v _i `i ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 192: int i = 0;
+[e = _i -> 0 `i ]
+"193
+[v _checksum `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 193: unsigned char checksum= buffer[len - 1];
+[e = _checksum *U + _buffer * -> - -> _len `i -> 1 `i `x -> -> # *U _buffer `i `x ]
+"194
+[v _rollingsum `uc ~T0 @X0 1 a ]
+[; ;Parser_thread.c: 194: unsigned char rollingsum = 0x00;
+[e = _rollingsum -> -> 0 `i `uc ]
+[; ;Parser_thread.c: 196: for(i = 0; i < len - 1; i++)
+"196
+{
+[e = _i -> 0 `i ]
+[e $U 612  ]
+"197
+[e :U 609 ]
+[; ;Parser_thread.c: 197: {
+{
+[; ;Parser_thread.c: 198: rollingsum += buffer[i];
+"198
+[e =+ _rollingsum *U + _buffer * -> _i `x -> -> # *U _buffer `i `x ]
+"199
+}
+"196
+[e ++ _i -> 1 `i ]
+[e :U 612 ]
+[e $ < _i - -> _len `i -> 1 `i 609  ]
+[e :U 610 ]
+"199
+}
+[; ;Parser_thread.c: 199: }
+[; ;Parser_thread.c: 201: return ( (rollingsum & 0xFF) == checksum ) ? 1 : 0;
+"201
+[e ) -> ? == & -> _rollingsum `i -> 255 `i -> _checksum `i : -> 1 `i -> 0 `i `uc ]
+[e $UE 607  ]
+[; ;Parser_thread.c: 202: }
+"202
+[e :UE 607 ]
+}
 "215
-[e :UE 612 ]
+[v _getMessageId `(uc ~T0 @X0 1 ef2`*uc`uc ]
+"216
+{
+[; ;Parser_thread.c: 215: unsigned char getMessageId(unsigned char buffer [], unsigned char length)
+[; ;Parser_thread.c: 216: {
+[e :U _getMessageId ]
+"215
+[v _buffer `*uc ~T0 @X0 1 r1 ]
+[v _length `uc ~T0 @X0 1 r2 ]
+"216
+[f ]
+[; ;Parser_thread.c: 217: if (length > 0) {
+"217
+[e $ ! > -> _length `i -> 0 `i 614  ]
+{
+[; ;Parser_thread.c: 218: return (buffer[0] & 0xF0) >> 4;
+"218
+[e ) -> >> & -> *U + _buffer * -> -> 0 `i `x -> -> # *U _buffer `i `x `i -> 240 `i -> 4 `i `uc ]
+[e $UE 613  ]
+"219
+}
+[; ;Parser_thread.c: 219: }
+[e $U 615  ]
+"221
+[e :U 614 ]
+[; ;Parser_thread.c: 221: else return 0xFF;
+[e ) -> -> 255 `i `uc ]
+[e $UE 613  ]
+[e :U 615 ]
+[; ;Parser_thread.c: 222: }
+"222
+[e :UE 613 ]
 }

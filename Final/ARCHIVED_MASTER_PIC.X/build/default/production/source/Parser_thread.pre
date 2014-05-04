@@ -6021,6 +6021,8 @@ void uart_write(unsigned char length, unsigned char *msg);
 void parseUART();
 
 # 7 "source/Parser_thread.c"
+unsigned int foot = 0;
+unsigned int inch = 0;
 unsigned int motorStatus;
 int parser_lthread(int msgtype,int length,unsigned char* msgbuf)
 {
@@ -6150,10 +6152,10 @@ data[3] = msgbuf[2];
 data[4] = msgbuf[3];
 data[5] = msgbuf[4];
 data[6] = msgbuf[5];
-data[7] = 0x00;
-data[8] = 0x00;
-data[9] = 0x00;
-data[10] = 0x00;
+data[7] = foot;
+data[8] = inch;
+data[9] = foot;
+data[10] = inch;
 int x = 0;
 for(x = 0; x < 11;x++)
 {
@@ -6162,12 +6164,17 @@ checksum += data[x];
 data[11] = checksum & 0x0FF;
 uart_write(12,data);
 }
+if(msgtype == 51)
+{
+foot = msgbuf[1];
+inch = msgbuf[2];
+}
 
 
 
 }
 
-# 166
+# 173
 unsigned char validateMessage(unsigned char buffer [], unsigned char length)
 {
 
@@ -6199,7 +6206,7 @@ rollingsum += buffer[i];
 return ( (rollingsum & 0xFF) == checksum ) ? 1 : 0;
 }
 
-# 208
+# 215
 unsigned char getMessageId(unsigned char buffer [], unsigned char length)
 {
 if (length > 0) {

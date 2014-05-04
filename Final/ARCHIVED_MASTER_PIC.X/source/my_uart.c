@@ -44,7 +44,7 @@ void uart_recv_int_handler() {
         // send an error message for this
         RCSTAbits.CREN = 0;
         RCSTAbits.CREN = 1;
-        ToMainLow_sendmsg(0, MSGT_OVERRUN, (void *) 0);
+        ToMainHigh_sendmsg(0, MSGT_OVERRUN, (void *) 0);
 
     }
 }

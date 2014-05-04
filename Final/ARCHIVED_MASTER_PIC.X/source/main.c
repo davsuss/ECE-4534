@@ -248,7 +248,7 @@ void main(void) {
      */
 
     // initialize Timers
-    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_256);
+    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
     
 #ifdef __USE18F26J50
     // MTJ added second argument for OpenTimer1()
@@ -257,7 +257,7 @@ void main(void) {
 #ifdef __USE18F46J50
     OpenTimer1(TIMER_INT_ON & T1_SOURCE_FOSC_4 & T1_PS_1_8 & T1_16BIT_RW & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF,0x0);
 #else
-    OpenTimer1(TIMER_INT_ON & T1_PS_1_8 & T1_16BIT_RW & T1_SOURCE_INT & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
+    //OpenTimer1(TIMER_INT_ON & T1_PS_1_8 & T1_16BIT_RW & T1_SOURCE_INT & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
 #endif
 #endif
 
@@ -347,20 +347,25 @@ void main(void) {
         if (length < 0) {
             // no message, check the error code to see if it is concern
             if (length != MSGQUEUE_EMPTY) {
+                RESET();
                 // This case be handled by your code.
             }
         } else {
             switch (msgtype) {
                 case MSGT_TIMER0:
                 {
-                    timer0_lthread(&t0thread_data, msgtype, length, msgbuffer);
+                    if(ic.status == I2C_IDLE)
+                    {
+                        i2c_configure_master(0x4F);
+                        i2c_master_recv(0x5);
+                    }
                     break;
                 };
-                case MSGT_I2C_MASTER_RECV_COMPLETE:
+                case MSGT_PARSE:
                 {
-                    ToMainLow_sendmsg(length,MSGT_SEND_BACK,msgbuffer);
+                    parser_lthread(msgtype,length,msgbuffer);
                     break;
-                }
+                };
                 case MSGT_UART_SEND:
                 {
                     uart_write(length,msgbuffer);
@@ -380,32 +385,23 @@ void main(void) {
         if (length < 0) {
             // no message, check the error code to see if it is concern
             if (length != MSGQUEUE_EMPTY) {
+                RESET();
                 // Your code should handle this situation
             }
         } else {
             switch (msgtype) {
-                case MSGT_TIMER1:
-                {
-                    timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
-                    break;
-                };
                 case MSGT_OVERRUN:
                 {
-                    break;
-                };
-                case MSGT_UART_DATA:
-                {
-                    //uart_lthread(&uthread_data, msgtype, length, msgbuffer);
-                    break;
-                };
-                case MSGT_PARSE:
-                {
-                    parser_lthread(msgtype,length,msgbuffer);
                     break;
                 };
                 case MSGT_SEND_BACK:
                 {
                     parser_lthread(msgtype,length,msgbuffer);
+                    break;
+                };
+                case MSGT_MOTOR_BACK:
+                {
+                   parser_lthread(msgtype,length,msgbuffer);
                     break;
                 };
                 default:
